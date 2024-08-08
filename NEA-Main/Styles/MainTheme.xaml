@@ -4,12 +4,14 @@
     <SolidColorBrush x:Key="PrimaryTextColour" Color="#efefef"/>
     <SolidColorBrush x:Key="PrimaryBackgroundColour" Color="#2c1516"/>
     <SolidColorBrush x:Key="SecondaryBackgroundColour" Color="#351a1a"/>
+    <SolidColorBrush x:Key="PrimaryForegroundColour" Color="#361e25"/>
     <SolidColorBrush x:Key="PrimaryButtonColour" Color="#947668"/>
     <SolidColorBrush x:Key="PrimaryButtonHover" Color="#c18b71"/>
     <SolidColorBrush x:Key="ButtonTextColour" Color="#d0bdbd "/>
     <SolidColorBrush x:Key="TextBoxColour" Color="#97716c"/>
     <SolidColorBrush x:Key="HighlightColour" Color="#C70039 "/>
-
+    
+    
     <Style TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource TextBoxColour}"/>
         <Setter Property="BorderThickness" Value="0"/>

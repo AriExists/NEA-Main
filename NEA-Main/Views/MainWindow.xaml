@@ -19,6 +19,12 @@
             <DataTemplate DataType="{x:Type vm:LoginViewModel}">
                 <views:LoginWindow/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CreateAccountViewModel}">
+                <views:CreateAccountWindow/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AppViewModel}">
+                <views:AppViewWindow/>
+            </DataTemplate>
         </ContentControl.Resources>
     </ContentControl>
     

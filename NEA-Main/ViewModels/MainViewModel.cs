@@ -13,7 +13,7 @@ namespace NEA_Main.ViewModels
 
         public MainViewModel()
         {
-            CurrentViewModel = new LoginViewModel();
+            CurrentViewModel = new AppViewModel();
         }
     }
 }
