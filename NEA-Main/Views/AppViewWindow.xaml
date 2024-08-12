@@ -40,11 +40,19 @@
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                
-                <Button Grid.Column="1"/>
-                <Button Grid.Column="3"/>
-                <Button Grid.Column="5"/>
-                <Button Grid.Column="7"/>
+
+                <Button Grid.Column="1">
+                    <Image Source="/Assets/groups.png"/>
+                </Button>
+                <Button Grid.Column="3">
+                    <Image Source="/Assets/thread.png"/>
+                </Button>
+                <Button Grid.Column="5">
+                    <Image Source="/Assets/phone.png"/>
+                </Button>
+                <Button Grid.Column="7">
+                    <Image Source="/Assets/server.png"/>
+                </Button>
                 
             </Grid>
             
@@ -59,9 +67,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="1">
-                    <Image Source="/Assets/send.png"/>
+                    <Image Source="/Assets/settings.png"/>
                 </Button>
-                <Button Grid.Column="3"/>
+                <Button Grid.Column="3">
+                    <Image Source="/Assets/account.png"/>
+                </Button>
             </Grid>
         </Grid>
 
@@ -78,7 +88,7 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Margin="15" Background="{DynamicResource PrimaryForegroundColour}"></TextBox>
+            <TextBox Margin="15" FontSize="35" Foreground="{DynamicResource PrimaryTextColour}" Background="{DynamicResource PrimaryForegroundColour}"></TextBox>
             <Button x:Name="SendButton" Grid.Column="3" Margin="16">
                 <Image Source="/Assets/send.png"/>
             </Button>

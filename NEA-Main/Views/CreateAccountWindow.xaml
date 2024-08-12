@@ -44,7 +44,8 @@
             <Label Content="Confirm password" Grid.Column="1" Grid.Row="4" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
             <TextBox x:Name="ConfirmPasswordInput" Grid.Column="1" Grid.Row="5" Height="80" VerticalAlignment="Top" FontSize="46" />
             <Button Grid.Column="1" Grid.Row="6" Width="400" Height="80" Content="Register" FontSize="40"/>
+            
         </Grid>
-
+        <Button Grid.Column="0" Grid.Row="0" Content="Back" Height="80" HorizontalAlignment="Stretch" Margin="15" FontSize="40" Command="{Binding NavigateStart}"/>
     </Grid>
 </UserControl>
