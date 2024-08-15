@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NEA_Main.Views"
+             xmlns:local="clr-namespace:NEA_Main.Views" xmlns:viewmodels="clr-namespace:NEA_Main.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:LoginViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1200">
     <Grid Background="{DynamicResource PrimaryBackgroundColour}">
@@ -36,15 +36,15 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label Content="Username" Grid.Column="1" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
-            <TextBox x:Name="UsernameInput" Grid.Column="1" Grid.Row="1" Height="80" VerticalAlignment="Top" FontSize="46" Background="{DynamicResource TextBoxColour}"/>
+            <TextBox x:Name="UsernameInput" Text="{Binding InputUserName}" Foreground="{DynamicResource PrimaryTextColour}" Grid.Column="1" Grid.Row="1" Height="80" VerticalAlignment="Top" FontSize="46" Background="{DynamicResource TextBoxColour}"/>
             <Label Content="Password" Grid.Column="1" Grid.Row="2" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
-            <TextBox x:Name="PasswordInput" Grid.Column="1" Grid.Row="3" Height="80" VerticalAlignment="Top" FontSize="46" />
-            <Button Grid.Column="1" Grid.Row="4" Width="400" Height="80" Content="Login" FontSize="40"/>
+            <TextBox x:Name="PasswordInput" Text="{Binding InputPassword}" Foreground="{DynamicResource PrimaryTextColour}" Grid.Column="1" Grid.Row="3" Height="80" VerticalAlignment="Top" FontSize="46" FontFamily="{StaticResource Password}" />
+            <Button Grid.Column="1" Grid.Row="4" Width="400" Height="80" Content="Login" FontSize="40" Command="{Binding TryLoginCommand}"/>
         </Grid>
         <Button  Content="Back" Margin="20" FontSize="40" Command="{Binding NavigateStart}" />
-        
-        
-        
+        <TextBlock Text="{Binding Result}" Grid.Row="2" Grid.Column="1" FontSize="42" Foreground="Red"/>
+
+
     </Grid>
 
 </UserControl>

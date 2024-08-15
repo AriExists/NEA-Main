@@ -9,9 +9,9 @@ namespace NEA_Main.Stores
 {
     public class NavStore
     {
-        public event Action CurrentViewModleChanged;
+        public event Action? CurrentViewModleChanged;
 
-        private ViewModelBase _currentViewModel;
+        private ViewModelBase? _currentViewModel;
         public ViewModelBase? CurrentViewModel
         {
             get => _currentViewModel;
