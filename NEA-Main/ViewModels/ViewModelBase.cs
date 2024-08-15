@@ -11,7 +11,7 @@ namespace NEA_Main.ViewModels
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnProperyChanged(string propertyName)
+        protected void OnProperyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

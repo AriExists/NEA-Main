@@ -5,10 +5,13 @@
              xmlns:local="clr-namespace:NEA_Main">
     
     <Application.Resources>
+
         <ResourceDictionary>
+            <FontFamily x:Key="Password">
+                pack://application:,,,/Assets/Fonts/#password
+            </FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainTheme.xaml"/>
-
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

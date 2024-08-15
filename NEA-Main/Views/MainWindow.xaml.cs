@@ -19,7 +19,7 @@ namespace NEA_Main
         public MainWindow()
         {
             InitializeComponent();
-
+            
         }
     }
 }

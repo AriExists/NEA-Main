@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NEA_Main.Views"
+             xmlns:local="clr-namespace:NEA_Main.Views" xmlns:viewmodels="clr-namespace:NEA_Main.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:CreateAccountViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1200">
     <Grid Background="{DynamicResource PrimaryBackgroundColour}">
@@ -38,14 +38,15 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label Content="Username" Grid.Column="1" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
-            <TextBox x:Name="UsernameInput" Grid.Column="1" Grid.Row="1" Height="80" VerticalAlignment="Top" FontSize="46"/>
+            <TextBox x:Name="UsernameInput" Text="{Binding InputUsername}" Grid.Column="1" Grid.Row="1" Height="80" VerticalAlignment="Top" FontSize="46" Foreground="{DynamicResource PrimaryTextColour}"/>
             <Label Content="Password" Grid.Column="1" Grid.Row="2" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
-            <TextBox x:Name="PasswordInput" Grid.Column="1" Grid.Row="3" Height="80" VerticalAlignment="Top" FontSize="46" />
+            <TextBox x:Name="PasswordInput" Text="{Binding InputPassword}" Grid.Column="1" Grid.Row="3" Height="80" VerticalAlignment="Top" FontSize="46" Foreground="{DynamicResource PrimaryTextColour}" FontFamily="{StaticResource Password}"/>
             <Label Content="Confirm password" Grid.Column="1" Grid.Row="4" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
-            <TextBox x:Name="ConfirmPasswordInput" Grid.Column="1" Grid.Row="5" Height="80" VerticalAlignment="Top" FontSize="46" />
-            <Button Grid.Column="1" Grid.Row="6" Width="400" Height="80" Content="Register" FontSize="40"/>
+            <TextBox x:Name="ConfirmPasswordInput" Text="{Binding InputConfirmPassword}" Grid.Column="1" Grid.Row="5" Height="80" VerticalAlignment="Top" FontSize="46" Foreground="{DynamicResource PrimaryTextColour}" FontFamily="{StaticResource Password}"/>
+            <Button Grid.Column="1" Grid.Row="6" Width="400" Height="80" Content="Register" FontSize="40" Command="{Binding RegisterCommand}"/>
             
         </Grid>
         <Button Grid.Column="0" Grid.Row="0" Content="Back" Height="80" HorizontalAlignment="Stretch" Margin="15" FontSize="40" Command="{Binding NavigateStart}"/>
+        <TextBlock x:Name="ErrorLabel" Grid.Row="2" Grid.Column="1" FontSize="28" VerticalAlignment="Center" Foreground="{Binding ResponseColour, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </UserControl>
