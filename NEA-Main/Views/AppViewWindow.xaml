@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:NEA_Main.Views"
+             xmlns:local="clr-namespace:NEA_Main.Views" xmlns:viewmodels="clr-namespace:NEA_Main.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AppViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1200">
     <Grid Background="{DynamicResource PrimaryBackgroundColour}">
@@ -76,9 +76,25 @@
         </Grid>
 
         <Rectangle Grid.Column="1" Grid.Row="1" Fill="{DynamicResource PrimaryForegroundColour}" RadiusX="12" RadiusY="12" Margin="10"/>
-        <VirtualizingStackPanel x:Name="TextChatContainer" Grid.Column="1" Grid.Row="1" Margin="15">
-            
-        </VirtualizingStackPanel>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="12*" />
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="GC_Lable" Content="{Binding CurrentGroupChatLabel}" Grid.Row="0" Foreground="{DynamicResource PrimaryTextColour}" FontSize="24" Background="{DynamicResource SecondaryBackgroundColour}"/>
+                <Label x:Name="Thread_Lable" Content="{Binding CurrentChatThreadLabel}" Grid.Column="1" Foreground="{DynamicResource PrimaryTextColour}" FontSize="24" Background="{DynamicResource SecondaryBackgroundColour}"/>
+            </Grid>
+            <VirtualizingStackPanel x:Name="TextChatContainer" Grid.Row="1" Margin="15">
+
+            </VirtualizingStackPanel>
+
+        </Grid>
+
 
         <Rectangle Grid.Column="1" Grid.Row="2" Fill="{DynamicResource PrimaryForegroundColour}" RadiusX="12" RadiusY="12" Margin="10 12"/>
         <Grid Grid.Column="1" Grid.Row="2">

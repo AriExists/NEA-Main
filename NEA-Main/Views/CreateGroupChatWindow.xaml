@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="NEA_Main.Views.CreateGroupChatWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NEA_Main.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1200">
+    <Grid Background="{DynamicResource PrimaryBackgroundColour}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="26*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="18*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="{DynamicResource SecondaryBackgroundColour}" Grid.Row="1" Grid.Column="1" RadiusX="20" RadiusY="20"/>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="10*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Button Content="Back" FontSize="34" HorizontalAlignment="Left" Margin="6" MinWidth="150"/>
+            <Label Content="Create Groupchat" FontSize="60" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Center"/>
+            <Label Content="Groupchat name:" Grid.Row="2" Grid.Column="1" FontSize="34" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
+            <TextBox Grid.Row="2" VerticalAlignment="Center" Height="80" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"></TextBox>
+            <Label Content="Groupchat description:" Grid.Row="3" Grid.Column="1" FontSize="34" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
+            <TextBox Grid.Row="3" VerticalAlignment="Center" Height="140" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"></TextBox>
+            <Button Grid.Row="5" FontSize="34" Width="250" HorizontalAlignment="Left" Margin="30 0" Content="Create"/>
+        </Grid>
+    </Grid>
+
+</UserControl>

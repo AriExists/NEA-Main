@@ -10,23 +10,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
 
-   
-    <ContentControl Content="{Binding CurrentViewModel}">
-        <ContentControl.Resources>
-            <DataTemplate DataType="{x:Type vm:StartViewModel}">
-                <views:StartWindow/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:LoginViewModel}">
-                <views:LoginWindow/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:CreateAccountViewModel}">
-                <views:CreateAccountWindow/>
-            </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:AppViewModel}">
-                <views:AppViewWindow/>
-            </DataTemplate>
-        </ContentControl.Resources>
-    </ContentControl>
+    <Grid>
+        <ContentControl Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type vm:StartViewModel}">
+                    <views:StartWindow/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                    <views:LoginWindow/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:CreateAccountViewModel}">
+                    <views:CreateAccountWindow/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:AppViewModel}">
+                    <views:AppViewWindow/>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+        
+        
+    </Grid>
+
     
 
 </Window>
