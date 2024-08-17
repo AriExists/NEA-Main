@@ -8,6 +8,7 @@ using System.Windows.Input;
 using NEA_Main.Models;
 using NEA_Main.Data;
 using System.ComponentModel;
+using NEA_Main.Commands;
 
 namespace NEA_Main.ViewModels
 {
@@ -15,6 +16,7 @@ namespace NEA_Main.ViewModels
     {
         public AccountUser SessionUser { get; set; }
         private GroupChat? _currentGroupChat;
+        public ICommand NavigateCreateGroupchatCommand {  get; set; }
         public GroupChat? CurrentGroupChat
         {
             get => _currentGroupChat;
@@ -52,6 +54,7 @@ namespace NEA_Main.ViewModels
             SessionUser = sessionUser;
             CurrentGroupChatLabel = "None";
             CurrentChatThreadLabel = "None";
+            NavigateCreateGroupchatCommand = new NavigateCreateGroupChat(navStore);
             
         }
     }

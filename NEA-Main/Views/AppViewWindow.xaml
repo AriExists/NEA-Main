@@ -105,7 +105,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBox Margin="15" FontSize="35" Foreground="{DynamicResource PrimaryTextColour}" Background="{DynamicResource PrimaryForegroundColour}"></TextBox>
-            <Button x:Name="SendButton" Grid.Column="3" Margin="16">
+            <Button x:Name="SendButton" Command="{Binding NavigateCreateGroupchatCommand}" Grid.Column="3" Margin="16">
                 <Image Source="/Assets/send.png"/>
             </Button>
         </Grid>
