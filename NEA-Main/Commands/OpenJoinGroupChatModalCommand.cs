@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace NEA_Main.Commands
 {
-    public class CreateGroupChatCommand : CommandBase
+    class OpenJoinGroupChatModalCommand : CommandBase
     {
 
-        private readonly CreateGroupChatViewModel _viewModel;
-        public CreateGroupChatCommand(CreateGroupChatViewModel viewModel)
+        private readonly AppViewModel _viewModel;
+        public OpenJoinGroupChatModalCommand(AppViewModel viewModel)
         {
             _viewModel = viewModel;
         }
+
+
         public override void Execute(object? parameter)
         {
-            _viewModel.TryCreateGroupChat();
+            _viewModel.OpenChangeGroupChatModal();
         }
     }
 }

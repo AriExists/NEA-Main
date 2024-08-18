@@ -17,5 +17,5 @@ public partial class AccountUser
 
     public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 
-    public virtual ICollection<GroupChat> JoinedGroupChats { get; set; } = new List<GroupChat>();
+    public virtual ICollection<GroupChat> GroupChats { get; set; } = new List<GroupChat>();
 }

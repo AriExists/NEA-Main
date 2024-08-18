@@ -8,15 +8,18 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using NEA_Main.Models;
 using NEA_Main.Data;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace NEA_Main.ViewModels
 {
     public class CreateGroupChatViewModel : ViewModelBase
     {
-        public ICommand NavigateStart{  get; set; }
+        public ICommand NavigateBack{  get; set; }
         public ICommand CreateGroupChat { get; set; }
         private Random _rnd = new Random();
         internal MasterContext context = new MasterContext();
+
+        private readonly AccountUser _sessionUser;
 
         private string _groupChatName;
         public string GroupChatName
@@ -50,39 +53,77 @@ namespace NEA_Main.ViewModels
                 OnProperyChanged(nameof(Result));
             }
         }
-        
-        public CreateGroupChatViewModel(NavStore navStore)
+
+        private System.Windows.Media.Brush _responseColour;
+        public System.Windows.Media.Brush ResponseColour
         {
-            NavigateStart = new NavigateStartCommand(navStore);
-            CreateGroupChat = new CreateGroupChatCommand();
+            get => _responseColour;
+            set
+            {
+                _responseColour = value;
+                OnProperyChanged(nameof(ResponseColour));
+            }
         }
-        private int id;
+
+        public CreateGroupChatViewModel(NavStore navStore, AccountUser sessionUser)
+        {
+            NavigateBack = new NavigateMainApp(navStore, sessionUser);
+            CreateGroupChat = new CreateGroupChatCommand(this);
+            _sessionUser = sessionUser;
+            ResponseColour = System.Windows.Media.Brushes.Red;
+        }
+
+
+
+
+        private int joinId;
         private bool validID;
         public void TryCreateGroupChat()
         {
             if (!string.IsNullOrEmpty(GroupChatName))
             {
-                //validID = false;
-                //while (!validID)
-                //{
-                //    validID = true;
-                //    id = _rnd.Next(1000, 10000);
-                //    foreach (GroupChat gc in context.GroupChats)
-                //    {
-                //        if (id == gc.JoinId) // makes sure generated ID to join the server is unique
-                //        {
-                //            validID = false;
-                //        }
-                //    }
-                //}
+                validID = false;
+                while (!validID)
+                {
+                    validID = true;
+                    joinId = _rnd.Next(1000, 10000);
+                    foreach (GroupChat gc in context.GroupChats)
+                    {
+                        if (joinId == gc.JoinId) // makes sure generated ID to join the server is unique
+                        {
+                            validID = false;
+                        }
+                    }
+                }
 
-                //GroupChat newGroupChat = new GroupChat()
-                //{
-                //    JoinId = id,
-                //    Name = GroupChatName,
-                //    Description = GroupChatDescription,
-                //    // append a general thread to the chatThreads property
-                //};
+
+
+                GroupChat newGroupChat = new GroupChat()
+                {
+                    JoinId = joinId,
+                    Name = GroupChatName,
+                    Description = GroupChatDescription,
+                };
+
+
+
+
+                context.Add(newGroupChat);
+                context.SaveChanges();
+
+                ChatThread newChatThread = new ChatThread()
+                {
+                    Description = "The default general chat",
+                    Name = "General",
+                    GroupChatId = newGroupChat.Id
+
+                };
+
+                context.Add(newChatThread);
+                context.SaveChanges();
+
+                ResponseColour = System.Windows.Media.Brushes.Green;
+                Result = "Groupchat created successfully!";
             }
             else
             {

@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace NEA_Main.Views
 {
     /// <summary>
-    /// Interaction logic for CreateGroupChatWindow.xaml
+    /// Interaction logic for JoinGroupChatModal.xaml
     /// </summary>
-    public partial class CreateGroupChatWindow : UserControl
+    public partial class JoinGroupChatModal : Window
     {
-        public CreateGroupChatWindow()
+        public JoinGroupChatModal()
         {
             InitializeComponent();
         }
-
     }
 }

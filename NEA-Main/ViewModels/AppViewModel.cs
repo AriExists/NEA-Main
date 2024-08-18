@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using NEA_Main.Models;
+using NEA_Main.Views;
 using NEA_Main.Data;
 using System.ComponentModel;
 using NEA_Main.Commands;
+using System.Windows;
 
 namespace NEA_Main.ViewModels
 {
@@ -16,7 +18,8 @@ namespace NEA_Main.ViewModels
     {
         public AccountUser SessionUser { get; set; }
         private GroupChat? _currentGroupChat;
-        public ICommand NavigateCreateGroupchatCommand {  get; set; }
+        public ICommand NavigateCreateGroupchatCommand { get; set; }
+        public ICommand JoinGCPopupCommand { get; set; }
         public GroupChat? CurrentGroupChat
         {
             get => _currentGroupChat;
@@ -38,6 +41,17 @@ namespace NEA_Main.ViewModels
             }
         }
 
+        private Window? _openModal;
+        public Window? OpenModal
+        {
+            get => _openModal;
+            set
+            {
+                _openModal = value;
+                OnProperyChanged(nameof(OpenModal));
+            }
+        }
+
         private string? _currentChatThreadLabel;
         public string? CurrentChatThreadLabel
         {
@@ -54,8 +68,44 @@ namespace NEA_Main.ViewModels
             SessionUser = sessionUser;
             CurrentGroupChatLabel = "None";
             CurrentChatThreadLabel = "None";
-            NavigateCreateGroupchatCommand = new NavigateCreateGroupChat(navStore);
+            NavigateCreateGroupchatCommand = new NavigateCreateGroupChat(navStore, sessionUser);
+            JoinGCPopupCommand = new OpenJoinGroupChatModalCommand(this);
             
         }
+
+        public void OpenChangeGroupChatModal()
+        {
+            OpenModal = new JoinGroupChatModal();
+            OpenModal.ShowDialog();
+        }
+
+        MasterContext context = new MasterContext();
+        private int _groupChatJoincode;
+        public void JoinGroupChat(string code)
+        {
+            _groupChatJoincode = Convert.ToInt32(_groupChatJoincode);
+            if (10000 <= _groupChatJoincode || _groupChatJoincode < 0) {
+                return;
+            }
+
+            foreach (GroupChat chat in context.GroupChats)
+            {
+                if (chat.JoinId == _groupChatJoincode)
+                {
+                    foreach(AccountUser user in chat.Users)
+                    {
+                        if (user.Id == SessionUser.Id)
+                        {
+                            return;
+                        }
+                    }
+
+                    // add id to groupchat user list and vise versa
+
+                }
+            }
+
+        }
+
     }
 }

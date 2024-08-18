@@ -11,9 +11,9 @@ public partial class ChatThread
 
     public string? Description { get; set; }
 
-    public int? GroupChatId { get; set; }
+    public int GroupChatId { get; set; }
 
-    public virtual GroupChat? GroupChat { get; set; }
+    public virtual GroupChat GroupChat { get; set; } = null!;
 
     public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 }

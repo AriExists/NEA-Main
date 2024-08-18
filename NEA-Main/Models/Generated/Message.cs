@@ -15,9 +15,9 @@ public partial class Message
 
     public TimeOnly TimeSent { get; set; }
 
-    public int? ChatThreadId { get; set; }
+    public int ChatThreadId { get; set; }
 
-    public virtual ChatThread? ChatThread { get; set; }
+    public virtual ChatThread ChatThread { get; set; } = null!;
 
     public virtual AccountUser Sender { get; set; } = null!;
 }

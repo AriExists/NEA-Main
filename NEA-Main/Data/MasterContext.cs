@@ -32,38 +32,30 @@ public partial class MasterContext : DbContext
     {
         modelBuilder.Entity<AccountUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_Users");
-
             entity.Property(e => e.ProfileImageUrl).HasColumnName("ProfileImageURL");
         });
 
         modelBuilder.Entity<ChatThread>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_Threads");
+            entity.HasIndex(e => e.GroupChatId, "IX_ChatThreads_GroupChatId");
 
-            entity.HasIndex(e => e.GroupChatId, "IX_Threads_GroupChatId");
-
-            entity.HasOne(d => d.GroupChat).WithMany(p => p.ChatThreads)
-                .HasForeignKey(d => d.GroupChatId)
-                .HasConstraintName("FK_Threads_GroupChats_GroupChatId");
+            entity.HasOne(d => d.GroupChat).WithMany(p => p.ChatThreads).HasForeignKey(d => d.GroupChatId);
         });
 
         modelBuilder.Entity<GroupChat>(entity =>
         {
             entity.Property(e => e.JoinId).HasColumnName("JoinID");
 
-            entity.HasMany(d => d.UsersWithAdmins).WithMany(p => p.JoinedGroupChats)
+            entity.HasMany(d => d.Users).WithMany(p => p.GroupChats)
                 .UsingEntity<Dictionary<string, object>>(
                     "AccountUserGroupChat",
-                    r => r.HasOne<AccountUser>().WithMany()
-                        .HasForeignKey("UsersWithAdminId")
-                        .HasConstraintName("FK_AccountUserGroupChat_Users_UsersWithAdminId"),
-                    l => l.HasOne<GroupChat>().WithMany().HasForeignKey("JoinedGroupChatsId"),
+                    r => r.HasOne<AccountUser>().WithMany().HasForeignKey("UsersId"),
+                    l => l.HasOne<GroupChat>().WithMany().HasForeignKey("GroupChatsId"),
                     j =>
                     {
-                        j.HasKey("JoinedGroupChatsId", "UsersWithAdminId");
+                        j.HasKey("GroupChatsId", "UsersId");
                         j.ToTable("AccountUserGroupChat");
-                        j.HasIndex(new[] { "UsersWithAdminId" }, "IX_AccountUserGroupChat_UsersWithAdminId");
+                        j.HasIndex(new[] { "UsersId" }, "IX_AccountUserGroupChat_UsersId");
                     });
         });
 
@@ -73,13 +65,9 @@ public partial class MasterContext : DbContext
 
             entity.HasIndex(e => e.SenderId, "IX_Messages_SenderId");
 
-            entity.HasOne(d => d.ChatThread).WithMany(p => p.Messages)
-                .HasForeignKey(d => d.ChatThreadId)
-                .HasConstraintName("FK_Messages_Threads_ChatThreadId");
+            entity.HasOne(d => d.ChatThread).WithMany(p => p.Messages).HasForeignKey(d => d.ChatThreadId);
 
-            entity.HasOne(d => d.Sender).WithMany(p => p.Messages)
-                .HasForeignKey(d => d.SenderId)
-                .HasConstraintName("FK_Messages_Users_SenderId");
+            entity.HasOne(d => d.Sender).WithMany(p => p.Messages).HasForeignKey(d => d.SenderId);
         });
 
         OnModelCreatingPartial(modelBuilder);

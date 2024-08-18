@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <None Remove="Assets\account.png" />
+    <None Remove="Assets\add.png" />
     <None Remove="Assets\Fonts\password.ttf" />
     <None Remove="Assets\groups.png" />
     <None Remove="Assets\phone.png" />
@@ -22,6 +23,9 @@
 
   <ItemGroup>
     <Resource Include="Assets\account.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\add.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Fonts\password.ttf">
@@ -75,6 +79,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CustomControls\" />
   </ItemGroup>
 
 </Project>
