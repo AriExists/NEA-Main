@@ -11,10 +11,12 @@ using NEA_Main.Data;
 using System.ComponentModel;
 using NEA_Main.Commands;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace NEA_Main.ViewModels
 {
-    class AppViewModel : ViewModelBase
+    public class AppViewModel : ViewModelBase
     {
         public AccountUser SessionUser { get; set; }
         private GroupChat? _currentGroupChat;
@@ -52,6 +54,17 @@ namespace NEA_Main.ViewModels
             }
         }
 
+        private ViewModelBase _openModalViewModel;
+        public ViewModelBase OpenModalViewModel
+        {
+            get => _openModalViewModel;
+            set
+            {
+                _openModalViewModel = value;
+                OnProperyChanged(nameof(OpenModalViewModel));
+            }
+        }
+
         private string? _currentChatThreadLabel;
         public string? CurrentChatThreadLabel
         {
@@ -75,36 +88,69 @@ namespace NEA_Main.ViewModels
 
         public void OpenChangeGroupChatModal()
         {
+            OpenModalViewModel = new JoinGroupChatViewModel(this);
             OpenModal = new JoinGroupChatModal();
+            OpenModal.DataContext = OpenModalViewModel;
             OpenModal.ShowDialog();
         }
 
         MasterContext context = new MasterContext();
         private int _groupChatJoincode;
-        public void JoinGroupChat(string code)
+        private OutputResult _out;
+        private GroupChat _targetGroupchat;
+        public OutputResult JoinGroupChat(string code)
         {
-            _groupChatJoincode = Convert.ToInt32(_groupChatJoincode);
-            if (10000 <= _groupChatJoincode || _groupChatJoincode < 0) {
-                return;
+            if (string.IsNullOrEmpty(code))
+            {
+                _out = new OutputResult("No ID input", System.Windows.Media.Brushes.Red);
+                return _out;
             }
+ 
+            if (code.Length > 4)
+            {
+                _out = new OutputResult("Invalid ID", System.Windows.Media.Brushes.Red);
+                return _out;
+            }
+            _groupChatJoincode = Convert.ToInt32(code);
 
             foreach (GroupChat chat in context.GroupChats)
             {
                 if (chat.JoinId == _groupChatJoincode)
                 {
-                    foreach(AccountUser user in chat.Users)
-                    {
-                        if (user.Id == SessionUser.Id)
-                        {
-                            return;
-                        }
-                    }
-
-                    // add id to groupchat user list and vise versa
-
+                    _targetGroupchat = chat;
                 }
             }
 
+            if (_targetGroupchat != null)
+            {
+                foreach (AccountUserGroupChat r in context.AccountUserGroupChats)
+                {
+                    if (r.GroupChatId == _targetGroupchat.Id)
+                    {
+                        if (r.AccountUserId == SessionUser.Id)
+                        {
+                            _out = new OutputResult("Users is already in groupchat", System.Windows.Media.Brushes.Red);
+                            return _out;
+                        }
+                    }
+                }
+
+                // adds id to groupchat user list and vise versa
+                AccountUserGroupChat relation = new AccountUserGroupChat()
+                {
+                    AccountUserId = SessionUser.Id,
+                    GroupChatId = _targetGroupchat.Id,
+                };
+
+                context.AccountUserGroupChats.Add(relation);
+                context.SaveChanges();
+
+                _out = new OutputResult("Groupchat Joined successfully", System.Windows.Media.Brushes.Green);
+                return _out;
+            }
+
+            _out = new OutputResult("Groupchat not found", System.Windows.Media.Brushes.Red);
+            return _out;
         }
 
     }

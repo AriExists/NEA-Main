@@ -10,7 +10,7 @@ namespace NEA_Main.Commands
     class OpenJoinGroupChatModalCommand : CommandBase
     {
 
-        private readonly AppViewModel _viewModel;
+        private readonly AppViewModel _viewModel; 
         public OpenJoinGroupChatModalCommand(AppViewModel viewModel)
         {
             _viewModel = viewModel;

@@ -25,9 +25,9 @@
             </Grid.RowDefinitions>
             <Label Content="Join Groupchat" Foreground="{DynamicResource PrimaryTextColour}" FontSize="35" HorizontalAlignment="Center"/>
             <Label Content="Groupchat ID" FontSize="20" Foreground="{DynamicResource PrimaryTextColour}" Grid.Row="2"/>
-            <TextBox FontSize="28" Height="40" Width="250" Margin="15 0" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Left" Grid.Row="2"/>
-            <TextBlock Text="{Binding Result}" Foreground="{Binding ResponseColour}" VerticalAlignment="Bottom" FontSize="18" Margin="10" Grid.Row="2"/>
-            <Button Content="Join" FontSize="28" Width="150" Height="50" Grid.Row="3"/>
+            <TextBox FontSize="28" Text="{Binding InputJoinCode, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="250" Margin="15 0" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Left" Grid.Row="2"/>
+            <TextBlock Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding ResponseColour, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" FontSize="18" Margin="10" Grid.Row="2"/>
+            <Button Content="Join" Command="{Binding JoinGroupChat}" FontSize="28" Width="150" Height="50" Grid.Row="3"/>
         </Grid>
     </Grid>
 </Window>

@@ -15,7 +15,7 @@ public partial class AccountUser
 
     public string? ProfileImageUrl { get; set; }
 
-    public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
+    public virtual ICollection<AccountUserGroupChat> AccountUserGroupChats { get; set; } = new List<AccountUserGroupChat>();
 
-    public virtual ICollection<GroupChat> GroupChats { get; set; } = new List<GroupChat>();
+    public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
 }

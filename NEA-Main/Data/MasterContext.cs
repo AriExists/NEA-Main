@@ -18,6 +18,8 @@ public partial class MasterContext : DbContext
 
     public virtual DbSet<AccountUser> AccountUsers { get; set; }
 
+    public virtual DbSet<AccountUserGroupChat> AccountUserGroupChats { get; set; }
+
     public virtual DbSet<ChatThread> ChatThreads { get; set; }
 
     public virtual DbSet<GroupChat> GroupChats { get; set; }
@@ -35,6 +37,17 @@ public partial class MasterContext : DbContext
             entity.Property(e => e.ProfileImageUrl).HasColumnName("ProfileImageURL");
         });
 
+        modelBuilder.Entity<AccountUserGroupChat>(entity =>
+        {
+            entity.HasIndex(e => e.AccountUserId, "IX_AccountUserGroupChats_AccountUserId");
+
+            entity.HasIndex(e => e.GroupChatId, "IX_AccountUserGroupChats_GroupChatId");
+
+            entity.HasOne(d => d.AccountUser).WithMany(p => p.AccountUserGroupChats).HasForeignKey(d => d.AccountUserId);
+
+            entity.HasOne(d => d.GroupChat).WithMany(p => p.AccountUserGroupChats).HasForeignKey(d => d.GroupChatId);
+        });
+
         modelBuilder.Entity<ChatThread>(entity =>
         {
             entity.HasIndex(e => e.GroupChatId, "IX_ChatThreads_GroupChatId");
@@ -45,18 +58,6 @@ public partial class MasterContext : DbContext
         modelBuilder.Entity<GroupChat>(entity =>
         {
             entity.Property(e => e.JoinId).HasColumnName("JoinID");
-
-            entity.HasMany(d => d.Users).WithMany(p => p.GroupChats)
-                .UsingEntity<Dictionary<string, object>>(
-                    "AccountUserGroupChat",
-                    r => r.HasOne<AccountUser>().WithMany().HasForeignKey("UsersId"),
-                    l => l.HasOne<GroupChat>().WithMany().HasForeignKey("GroupChatsId"),
-                    j =>
-                    {
-                        j.HasKey("GroupChatsId", "UsersId");
-                        j.ToTable("AccountUserGroupChat");
-                        j.HasIndex(new[] { "UsersId" }, "IX_AccountUserGroupChat_UsersId");
-                    });
         });
 
         modelBuilder.Entity<Message>(entity =>
