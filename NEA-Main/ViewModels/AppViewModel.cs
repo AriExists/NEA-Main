@@ -29,6 +29,7 @@ namespace NEA_Main.ViewModels
         public ICommand NavigateCreateGroupchatCommand { get; set; }
         public ICommand JoinGCPopupCommand { get; set; }
         public ICommand SendMessageCommand {  get; set; }
+        public ICommand OpenCreateThreadCommand { get; set; }
 
         private DispatcherTimer _timer;
 
@@ -136,6 +137,7 @@ namespace NEA_Main.ViewModels
             NavigateCreateGroupchatCommand = new NavigateCreateGroupChat(navStore, sessionUser);
             JoinGCPopupCommand = new OpenJoinGroupChatModalCommand(this);
             SendMessageCommand = new SendMessageCommand(this);
+            OpenCreateThreadCommand = new OpenCreateThreadCommand(this);
             UpdateViewGroupChatData();
             UpdateCurrentGroupChatThreads();
             Messages = new ObservableCollection<Message>();
@@ -145,10 +147,18 @@ namespace NEA_Main.ViewModels
 
         }
 
-        public void OpenChangeGroupChatModal()
+        public void OpenNewModal(Window modal, ViewModelBase viewModel)
         {
-            OpenModalViewModel = new JoinGroupChatViewModel(this);
-            OpenModal = new JoinGroupChatModal();
+            if (OpenModal != null)
+            {
+                OpenModal.Close();
+                OpenModal = null;
+            }
+
+            //OpenModalViewModel = new JoinGroupChatViewModel(this);
+            //OpenModal = new JoinGroupChatModal();
+            OpenModalViewModel = viewModel;
+            OpenModal = modal;
             OpenModal.DataContext = OpenModalViewModel;
             OpenModal.ShowDialog();
             

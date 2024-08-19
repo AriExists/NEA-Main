@@ -5,23 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using NEA_Main.Views;
 
 namespace NEA_Main.Commands
 {
-    class OpenJoinGroupChatModalCommand : CommandBase
+    public class OpenCreateThreadCommand : CommandBase
     {
-
         private readonly AppViewModel _viewModel;
         private readonly Window _modal;
         private readonly ViewModelBase _modalViewModal;
-        public OpenJoinGroupChatModalCommand(AppViewModel viewModel)
+        public OpenCreateThreadCommand(AppViewModel viewModel)
         {
             _viewModel = viewModel;
-            _modal = new JoinGroupChatModal();
-            _modalViewModal = new JoinGroupChatViewModel(_viewModel);
+            _modal = new CreateThreadPopup();
+            _modalViewModal = new CreateThreadViewModel(_viewModel);
         }
-
 
         public override void Execute(object? parameter)
         {

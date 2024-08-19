@@ -1,0 +1,40 @@
+﻿<Window x:Class="NEA_Main.Views.CreateThreadPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NEA_Main.Views"
+        xmlns:vm="clr-namespace:NEA_Main.ViewModels"
+        xmlns:views="clr-namespace:NEA_Main.Views" d:DataContext="{d:DesignInstance Type=vm:CreateThreadViewModel}"
+        mc:Ignorable="d"
+        Title="CreateThreadPopup" Height="500" Width="400">
+    <Grid Background="{DynamicResource PrimaryBackgroundColour}">
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vm:CreateThreadViewModel}">
+                <views:CreateThreadPopup/>
+            </DataTemplate>
+        </Grid.Resources>
+        <Rectangle Fill="{DynamicResource SecondaryBackgroundColour}" Margin="20" RadiusX="20" RadiusY="20"/>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Label Content="Create Thread" Foreground="{DynamicResource PrimaryTextColour}" FontSize="35" HorizontalAlignment="Center"/>
+            
+            <Label Content="Thread Name" FontSize="20" Foreground="{DynamicResource PrimaryTextColour}" Grid.Row="2"/>
+            <TextBox FontSize="28" Text="{Binding InputThreadName, UpdateSourceTrigger=PropertyChanged}" Height="40" Width="320" Margin="15 0" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Left" Grid.Row="2"/>
+            
+            <Label Content="Thread Description" FontSize="20" Foreground="{DynamicResource PrimaryTextColour}" Grid.Row="3"/>
+            <TextBox FontSize="20" Text="{Binding InputThreadDescription, UpdateSourceTrigger=PropertyChanged}" Height="80" Width="320" Margin="15 10" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="3"/>
+            
+            <TextBlock Text="{Binding Result, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding ResponseColour, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" FontSize="18" Margin="10" Grid.Row="2"/>
+            <Button Content="Create" Command="{Binding CreateThreadCommand}" FontSize="28" Width="150" Height="50" Grid.Row="4"/>
+        </Grid>
+        
+    </Grid>
+</Window>
