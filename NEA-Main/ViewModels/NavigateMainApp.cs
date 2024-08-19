@@ -1,5 +1,6 @@
 ﻿using NEA_Main.Commands;
 using NEA_Main.Models;
+using NEA_Main.Models.Generated;
 using NEA_Main.Stores;
 using System;
 using System.Collections.Generic;

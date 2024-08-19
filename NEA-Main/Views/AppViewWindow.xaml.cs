@@ -24,5 +24,6 @@ namespace NEA_Main.Views
         {
             InitializeComponent();
         }
+
     }
 }

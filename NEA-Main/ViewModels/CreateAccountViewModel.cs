@@ -13,6 +13,7 @@ using NEA_Main.Data;
 using NEA_Main.Models;
 using System.Drawing;
 using System.Windows.Media;
+using NEA_Main.Models.Generated;
 
 namespace NEA_Main.ViewModels
 {

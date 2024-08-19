@@ -1,4 +1,5 @@
 ﻿using NEA_Main.Models;
+using NEA_Main.Models.Generated;
 using NEA_Main.Stores;
 using NEA_Main.ViewModels;
 using System;

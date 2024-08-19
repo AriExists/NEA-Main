@@ -11,6 +11,7 @@ using System.Windows.Input;
 using NEA_Main.Data;
 using NEA_Main.Models;
 using System.Windows.Controls.Primitives;
+using NEA_Main.Models.Generated;
 
 namespace NEA_Main.ViewModels
 {

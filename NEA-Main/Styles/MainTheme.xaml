@@ -30,7 +30,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
+
     
     <Style TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonColour}"/>

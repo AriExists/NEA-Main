@@ -92,12 +92,42 @@
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
-                <Label x:Name="GC_Lable" Content="{Binding CurrentGroupChatLabel}" Grid.Row="0" Foreground="{DynamicResource PrimaryTextColour}" FontSize="24" Background="{DynamicResource SecondaryBackgroundColour}"/>
-                <Label x:Name="Thread_Lable" Content="{Binding CurrentChatThreadLabel}" Grid.Column="1" Foreground="{DynamicResource PrimaryTextColour}" FontSize="24" Background="{DynamicResource SecondaryBackgroundColour}"/>
+                
+                <Label x:Name="GC_Lable" Content="Groupchat" Grid.Row="0" Foreground="{DynamicResource PrimaryTextColour}" FontSize="24" Background="{DynamicResource SecondaryBackgroundColour}"/>
+                <ComboBox ItemsSource="{Binding JoinedGroupChats}" SelectedItem="{Binding CurrentGroupChat}" Width="360" HorizontalAlignment="Right" Margin="5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+               
+                <Label x:Name="Thread_Lable" Content="Thread" Grid.Column="1" Foreground="{DynamicResource PrimaryTextColour}" Margin="0" FontSize="24" Background="{DynamicResource SecondaryBackgroundColour}"/>
+                <ComboBox ItemsSource="{Binding CurrentChatThreads}" SelectedItem="{Binding CurrentThread}" Grid.Column="1" Width="360" HorizontalAlignment="Right" Margin="5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            
             </Grid>
-            <VirtualizingStackPanel x:Name="TextChatContainer" Grid.Row="1" Margin="15">
-
-            </VirtualizingStackPanel>
+            <ListBox x:Name="ChatContainer" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource PrimaryForegroundColour}" Grid.Row="1" Margin="15">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <WrapPanel FlowDirection="LeftToRight">
+                                <TextBlock Text="{Binding SenderUsername}" FontSize="18" Foreground="{DynamicResource PrimaryTextColour}"/>
+                                <TextBlock Text="   "/>
+                                <TextBlock  Text="{Binding TimeSent}" FontSize="18" Foreground="{DynamicResource PrimaryTextColour}"/>
+                            </WrapPanel>
+                            
+                            <TextBlock Text="{Binding Text}" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}"/>
+                            
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
         </Grid>
 
@@ -110,8 +140,8 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
-            <TextBox Margin="15" FontSize="35" Foreground="{DynamicResource PrimaryTextColour}" Background="{DynamicResource PrimaryForegroundColour}"></TextBox>
-            <Button x:Name="SendButton" Command="{Binding NavigateCreateGroupchatCommand}" Grid.Column="3" Margin="16">
+            <TextBox Text="{Binding InputMessage, UpdateSourceTrigger=PropertyChanged}" Margin="15" FontSize="35" Foreground="{DynamicResource PrimaryTextColour}" Background="{DynamicResource PrimaryForegroundColour}"></TextBox>
+            <Button x:Name="SendButton" Command="{Binding SendMessageCommand}" Grid.Column="3" Margin="16">
                 <Image Source="/Assets/send.png"/>
             </Button>
         </Grid>

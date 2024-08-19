@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using NEA_Main.Models;
+using NEA_Main.Models.Generated;
 
 namespace NEA_Main.Data;
 
@@ -32,45 +32,6 @@ public partial class MasterContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AccountUser>(entity =>
-        {
-            entity.Property(e => e.ProfileImageUrl).HasColumnName("ProfileImageURL");
-        });
-
-        modelBuilder.Entity<AccountUserGroupChat>(entity =>
-        {
-            entity.HasIndex(e => e.AccountUserId, "IX_AccountUserGroupChats_AccountUserId");
-
-            entity.HasIndex(e => e.GroupChatId, "IX_AccountUserGroupChats_GroupChatId");
-
-            entity.HasOne(d => d.AccountUser).WithMany(p => p.AccountUserGroupChats).HasForeignKey(d => d.AccountUserId);
-
-            entity.HasOne(d => d.GroupChat).WithMany(p => p.AccountUserGroupChats).HasForeignKey(d => d.GroupChatId);
-        });
-
-        modelBuilder.Entity<ChatThread>(entity =>
-        {
-            entity.HasIndex(e => e.GroupChatId, "IX_ChatThreads_GroupChatId");
-
-            entity.HasOne(d => d.GroupChat).WithMany(p => p.ChatThreads).HasForeignKey(d => d.GroupChatId);
-        });
-
-        modelBuilder.Entity<GroupChat>(entity =>
-        {
-            entity.Property(e => e.JoinId).HasColumnName("JoinID");
-        });
-
-        modelBuilder.Entity<Message>(entity =>
-        {
-            entity.HasIndex(e => e.ChatThreadId, "IX_Messages_ChatThreadId");
-
-            entity.HasIndex(e => e.SenderId, "IX_Messages_SenderId");
-
-            entity.HasOne(d => d.ChatThread).WithMany(p => p.Messages).HasForeignKey(d => d.ChatThreadId);
-
-            entity.HasOne(d => d.Sender).WithMany(p => p.Messages).HasForeignKey(d => d.SenderId);
-        });
-
         OnModelCreatingPartial(modelBuilder);
     }
 

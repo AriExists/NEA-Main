@@ -1,4 +1,5 @@
 ﻿using NEA_Main.Models;
+using NEA_Main.Models.Generated;
 using System;
 using System.Collections.Generic;
 using System.Linq;

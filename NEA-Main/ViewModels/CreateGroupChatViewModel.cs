@@ -9,6 +9,7 @@ using System.Windows.Input;
 using NEA_Main.Models;
 using NEA_Main.Data;
 using Microsoft.VisualBasic.ApplicationServices;
+using NEA_Main.Models.Generated;
 
 namespace NEA_Main.ViewModels
 {
@@ -123,7 +124,7 @@ namespace NEA_Main.ViewModels
                 context.SaveChanges();
 
                 ResponseColour = System.Windows.Media.Brushes.Green;
-                Result = "Groupchat created successfully!";
+                Result = $"Groupchat created successfully! Join code: {newGroupChat.JoinId}";
             }
             else
             {
