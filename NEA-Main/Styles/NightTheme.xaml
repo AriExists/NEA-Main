@@ -2,14 +2,14 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush x:Key="PrimaryTextColour" Color="#efefef"/>
-    <SolidColorBrush x:Key="PrimaryBackgroundColour" Color="#2c1516"/>
-    <SolidColorBrush x:Key="SecondaryBackgroundColour" Color="#351a1a"/>
-    <SolidColorBrush x:Key="PrimaryForegroundColour" Color="#361e25"/>
-    <SolidColorBrush x:Key="PrimaryButtonColour" Color="#947668"/>
-    <SolidColorBrush x:Key="PrimaryButtonHover" Color="#c18b71"/>
-    <SolidColorBrush x:Key="ButtonTextColour" Color="#d0bdbd "/>
-    <SolidColorBrush x:Key="TextBoxColour" Color="#97716c"/>
-    <SolidColorBrush x:Key="HighlightColour" Color="#C70039 "/>
+    <SolidColorBrush x:Key="PrimaryBackgroundColour" Color="#092635"/>
+    <SolidColorBrush x:Key="SecondaryBackgroundColour" Color="#1B4242"/>
+    <SolidColorBrush x:Key="PrimaryForegroundColour" Color="#5C8374"/>
+    <SolidColorBrush x:Key="PrimaryButtonColour" Color="#6aa38d"/>
+    <SolidColorBrush x:Key="PrimaryButtonHover" Color="#93cbb5"/>
+    <SolidColorBrush x:Key="ButtonTextColour" Color="#b9f3dc "/>
+    <SolidColorBrush x:Key="TextBoxColour" Color="#6aa38d"/>
+    <SolidColorBrush x:Key="HighlightColour" Color="#9EC8B9 "/>
 
     <FontFamily x:Key="Password">
         pack://application:,,,/Assets/Fonts/#password
@@ -35,7 +35,7 @@
     </Style>
 
 
-    
+
     <Style TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonColour}"/>
         <Setter Property="Foreground" Value="{DynamicResource ButtonTextColour}"/>
@@ -55,7 +55,7 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryButtonHover}"/>
             </Trigger>
         </Style.Triggers>
-        
+
         <Style.Resources>
             <Style TargetType="Border">
                 <Setter Property="CornerRadius" Value="12"/>

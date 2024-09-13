@@ -1,15 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+
     <SolidColorBrush x:Key="PrimaryTextColour" Color="#efefef"/>
-    <SolidColorBrush x:Key="PrimaryBackgroundColour" Color="#2c1516"/>
-    <SolidColorBrush x:Key="SecondaryBackgroundColour" Color="#351a1a"/>
-    <SolidColorBrush x:Key="PrimaryForegroundColour" Color="#361e25"/>
-    <SolidColorBrush x:Key="PrimaryButtonColour" Color="#947668"/>
-    <SolidColorBrush x:Key="PrimaryButtonHover" Color="#c18b71"/>
-    <SolidColorBrush x:Key="ButtonTextColour" Color="#d0bdbd "/>
-    <SolidColorBrush x:Key="TextBoxColour" Color="#97716c"/>
-    <SolidColorBrush x:Key="HighlightColour" Color="#C70039 "/>
+    <SolidColorBrush x:Key="PrimaryBackgroundColour" Color="#001e3b"/>
+    <SolidColorBrush x:Key="SecondaryBackgroundColour" Color="#004589"/>
+    <SolidColorBrush x:Key="PrimaryForegroundColour" Color="#5184b7"/>
+    <SolidColorBrush x:Key="PrimaryButtonColour" Color="#89c4ff"/>
+    <SolidColorBrush x:Key="PrimaryButtonHover" Color="#b8d7f5"/>
+    <SolidColorBrush x:Key="ButtonTextColour" Color="#7890a7 "/>
+    <SolidColorBrush x:Key="TextBoxColour" Color="#697e93"/>
+    <SolidColorBrush x:Key="HighlightColour" Color="#D8EBFF"/>
 
     <FontFamily x:Key="Password">
         pack://application:,,,/Assets/Fonts/#password
@@ -35,7 +36,7 @@
     </Style>
 
 
-    
+
     <Style TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource PrimaryButtonColour}"/>
         <Setter Property="Foreground" Value="{DynamicResource ButtonTextColour}"/>
@@ -55,13 +56,12 @@
                 <Setter Property="Background" Value="{DynamicResource PrimaryButtonHover}"/>
             </Trigger>
         </Style.Triggers>
-        
+
         <Style.Resources>
             <Style TargetType="Border">
                 <Setter Property="CornerRadius" Value="12"/>
             </Style>
         </Style.Resources>
     </Style>
-
 
 </ResourceDictionary>

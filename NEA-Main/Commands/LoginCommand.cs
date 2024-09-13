@@ -29,7 +29,7 @@ namespace NEA_Main.Commands
             {
                 _navStore.CurrentViewModel = new AppViewModel(_navStore, _sessionUserStore);
             }
-            
+
         }
     }
 }

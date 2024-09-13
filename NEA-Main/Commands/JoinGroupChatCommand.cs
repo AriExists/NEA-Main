@@ -24,6 +24,7 @@ namespace NEA_Main.Commands
         {
             _out = _parentViewModel.JoinGroupChat(_parentModal.InputJoinCode);
             _parentModal.Output(_out);
+            _parentViewModel.updateGroupChatSelector();
 
         }
     }

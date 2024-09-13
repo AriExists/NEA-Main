@@ -3,9 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
              xmlns:local="clr-namespace:NEA_Main">
-    
-    <Application.Resources>
 
+    <Application.Resources>
         <ResourceDictionary>
             <FontFamily x:Key="Password">
                 pack://application:,,,/Assets/Fonts/#password

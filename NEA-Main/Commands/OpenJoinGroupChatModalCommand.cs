@@ -13,18 +13,18 @@ namespace NEA_Main.Commands
     {
 
         private readonly AppViewModel _viewModel;
-        private readonly Window _modal;
         private readonly ViewModelBase _modalViewModal;
         public OpenJoinGroupChatModalCommand(AppViewModel viewModel)
         {
             _viewModel = viewModel;
-            _modal = new JoinGroupChatModal();
+            
             _modalViewModal = new JoinGroupChatViewModel(_viewModel);
         }
 
 
         public override void Execute(object? parameter)
         {
+            var _modal = new JoinGroupChatModal();
             _viewModel.OpenNewModal(_modal, _modalViewModal);
         }
     }

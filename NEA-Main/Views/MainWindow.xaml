@@ -28,6 +28,12 @@
                 <DataTemplate DataType="{x:Type vm:CreateGroupChatViewModel}">
                     <views:CreateGroupChatWindow/>
                 </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:UserListViewModel}">
+                    <views:UserListPopup/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                    <views:SettingsPage/>
+                </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
         

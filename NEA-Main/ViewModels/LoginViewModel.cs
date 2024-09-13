@@ -61,7 +61,7 @@ namespace NEA_Main.ViewModels
         }
 
         MasterContext context = new MasterContext();
-        
+
         public AccountUser? TryLogin()
         {
             if (!string.IsNullOrEmpty(InputPassword) && !string.IsNullOrEmpty(InputUserName))
@@ -71,7 +71,7 @@ namespace NEA_Main.ViewModels
                     if (u.Username == InputUserName)
                     {
                         if (u.Password == InputPassword)
-                        {   
+                        {
                             return u;
                         }
                     }
@@ -81,14 +81,14 @@ namespace NEA_Main.ViewModels
             }
             return null;
         }
-        
 
-        //public void CompleteLogin(AccountUser user)
-        //{
-            
-        //    SessionUserStore sessionUser = new SessionUserStore(user);
-        //    _navStore.CurrentViewModel = new LoginViewModel(_navStore);
 
-        //}
+        public void CompleteLogin(AccountUser user)
+        {
+
+            SessionUserStore sessionUser = new SessionUserStore(user);
+            _navStore.CurrentViewModel = new LoginViewModel(_navStore);
+
+        }
     }
 }

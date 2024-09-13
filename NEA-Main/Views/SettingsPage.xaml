@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="NEA_Main.Views.SettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NEA_Main.Views" xmlns:viewmodels="clr-namespace:NEA_Main.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SettingsViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="{DynamicResource PrimaryBackgroundColour}">
+        <Rectangle Margin="20" Fill="{DynamicResource SecondaryBackgroundColour}" RadiusX="10" RadiusY="10"/>
+        <Grid Margin="25" Background="{DynamicResource SecondaryBackgroundColour}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="65px" />
+                <RowDefinition Height="100px" />
+                <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+            <Label Content="Settings" Foreground="{DynamicResource PrimaryTextColour}" FontSize="48" HorizontalAlignment="Center"/>
+            <Label Content="Theme:" Foreground="{DynamicResource PrimaryTextColour}" FontSize="34" VerticalAlignment="Center" Grid.Row="1"/>
+
+            <Button Command="{Binding NavigateStart}" Width="50" Height="50" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
+            <Rectangle Fill="{DynamicResource PrimaryForegroundColour}" Grid.Row="2" Margin="18" RadiusX="8" RadiusY="8"/>
+            <UniformGrid Margin="20" Rows="1" Columns="6" Grid.Row="2" Background="{DynamicResource PrimaryForegroundColour}" VerticalAlignment="Center">
+
+                <Button Command="{Binding ChangeThemeCmd}" Content="Azure" CommandParameter="Azure" Grid.Row="2" Background="Blue" Width="50" Height="50" HorizontalAlignment="Center"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Haze" CommandParameter="Haze" Grid.Row="2" Background="Purple" Width="50" Height="50" HorizontalAlignment="Center"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Maroon" CommandParameter="Maroon" Grid.Row="2" Background="Maroon" Width="50" Height="50" HorizontalAlignment="Center"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Night" CommandParameter="Night" Grid.Row="2" Background="#092635" Width="50" Height="50" HorizontalAlignment="Center"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Moss" CommandParameter="Moss" Grid.Row="2" Background="#618264" Width="50" Height="50" HorizontalAlignment="Center"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Sunburn" CommandParameter="Sunburn" Grid.Row="2" Background="#A04747" Width="50" Height="50" HorizontalAlignment="Center"/>
+
+            </UniformGrid>
+        </Grid>
+    </Grid>
+</UserControl>

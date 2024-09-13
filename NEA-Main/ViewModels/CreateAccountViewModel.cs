@@ -98,7 +98,7 @@ namespace NEA_Main.ViewModels
                     Result = "The password and confirm password do not match";
                     return -1;
                 }
-                // Start of database editing code
+                //Start of database editing code
                 foreach (AccountUser u in context.AccountUsers)  //Check other users in database to avoid duplicate usernames
                 {
                     if (string.Equals(u.Username.ToLower(), InputUsername.ToLower()))

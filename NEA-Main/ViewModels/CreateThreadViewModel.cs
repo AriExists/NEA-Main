@@ -77,15 +77,15 @@ namespace NEA_Main.ViewModels
             newThread = new ChatThread();
             if (!string.IsNullOrWhiteSpace(InputThreadName) && _parentViewModel.CurrentGroupChat != null)
             {
-                foreach (GroupChat chat in context.GroupChats)
-                {
-                    if (chat.Id == _parentViewModel.CurrentGroupChat.Id)
-                    {
-                        newThread.GroupChatId = chat.Id;
-                        newThread.Name = InputThreadName;
-                        newThread.Description = InputThreadDescription;
-                    }
-                }
+                //foreach (GroupChat chat in context.GroupChats)
+                //{
+                //    if (chat.Id == _parentViewModel.CurrentGroupChat.Id)
+                //    {
+                //        newThread.GroupChatId = chat.Id;
+                //        newThread.Name = InputThreadName;
+                //        newThread.Description = InputThreadDescription;
+                //    }
+                //}
 
                 if (newThread != null)
                 {

@@ -15,7 +15,7 @@ public partial class Message
 
     public string Text { get; set; } = null!;
 
-    public string SenderUsername { get; set; } = null!;
+    public int SenderId { get; set; }
 
     public DateTime DateSent { get; set; }
 
@@ -23,7 +23,7 @@ public partial class Message
 
     public int ChatThreadId { get; set; }
 
-    public int SenderId { get; set; }
+    public string SenderUsername { get; set; } = null!;
 
     [ForeignKey("ChatThreadId")]
     [InverseProperty("Messages")]

@@ -27,9 +27,12 @@ namespace NEA_Main.ViewModels
         public AccountUser SessionUser { get; set; }
         private GroupChat? _currentGroupChat;
         public ICommand NavigateCreateGroupchatCommand { get; set; }
+        public ICommand NavigateSettingsCommand { get; set; }
         public ICommand JoinGCPopupCommand { get; set; }
-        public ICommand SendMessageCommand {  get; set; }
+        public ICommand OpenUserList { get; set; }
+        public ICommand SendMessageCommand { get; set; }
         public ICommand OpenCreateThreadCommand { get; set; }
+        public ICommand RefreshUserListCommand { get; set; }
 
         private DispatcherTimer _timer;
 
@@ -42,6 +45,8 @@ namespace NEA_Main.ViewModels
                 OnProperyChanged(nameof(CurrentGroupChat));
                 UpdateCurrentGroupChatThreads();
                 Messages.Clear();
+
+
             }
         }
 
@@ -135,9 +140,13 @@ namespace NEA_Main.ViewModels
 
             SessionUser = sessionUser;
             NavigateCreateGroupchatCommand = new NavigateCreateGroupChat(navStore, sessionUser);
+            NavigateSettingsCommand = new NavigateSettingsCommand(navStore, sessionUser);
             JoinGCPopupCommand = new OpenJoinGroupChatModalCommand(this);
             SendMessageCommand = new SendMessageCommand(this);
             OpenCreateThreadCommand = new OpenCreateThreadCommand(this);
+            OpenUserList = new OpenUserListCommand(this);
+
+            
             UpdateViewGroupChatData();
             UpdateCurrentGroupChatThreads();
             Messages = new ObservableCollection<Message>();
@@ -155,13 +164,20 @@ namespace NEA_Main.ViewModels
                 OpenModal = null;
             }
 
-            //OpenModalViewModel = new JoinGroupChatViewModel(this);
-            //OpenModal = new JoinGroupChatModal();
             OpenModalViewModel = viewModel;
             OpenModal = modal;
             OpenModal.DataContext = OpenModalViewModel;
+            OpenModal.Closed += ClearModal;
             OpenModal.ShowDialog();
             
+        }
+
+
+        public void ClearModal(object? sender, EventArgs e)
+        {
+            OpenModal.Closed -= ClearModal;
+            OpenModal = null;
+
         }
 
         public void updateGroupChatSelector()
@@ -240,8 +256,8 @@ namespace NEA_Main.ViewModels
             JoinedGroupChats = new ObservableCollection<GroupChat>();
             var userRelations = context.AccountUserGroupChats
                                 .Where(agc => agc.AccountUserId == SessionUser.Id);
-            
-                                
+
+
             foreach (AccountUserGroupChat relation in userRelations)
             {
                 _joinedChatIds.Add(relation.GroupChatId);
@@ -267,7 +283,7 @@ namespace NEA_Main.ViewModels
                 foreach (ChatThread thread in context.ChatThreads)
                 {
                     if (thread.GroupChatId == CurrentGroupChat.Id)
-                    {  
+                    {
                         CurrentChatThreads.Add(thread);
                     }
                 }
