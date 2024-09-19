@@ -25,6 +25,8 @@ public partial class Message
 
     public string SenderUsername { get; set; } = null!;
 
+    public string? SenderProfilePictureUrl { get; set; }
+
     [ForeignKey("ChatThreadId")]
     [InverseProperty("Messages")]
     public virtual ChatThread ChatThread { get; set; } = null!;

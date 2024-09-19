@@ -28,6 +28,7 @@ namespace NEA_Main.ViewModels
         private GroupChat? _currentGroupChat;
         public ICommand NavigateCreateGroupchatCommand { get; set; }
         public ICommand NavigateSettingsCommand { get; set; }
+        public ICommand NavigateUserProfile { get; set; }
         public ICommand JoinGCPopupCommand { get; set; }
         public ICommand OpenUserList { get; set; }
         public ICommand SendMessageCommand { get; set; }
@@ -106,6 +107,7 @@ namespace NEA_Main.ViewModels
             }
         }
 
+
         private ObservableCollection<Message> _messages;
         public ObservableCollection<Message> Messages
         {
@@ -141,6 +143,7 @@ namespace NEA_Main.ViewModels
             SessionUser = sessionUser;
             NavigateCreateGroupchatCommand = new NavigateCreateGroupChat(navStore, sessionUser);
             NavigateSettingsCommand = new NavigateSettingsCommand(navStore, sessionUser);
+            NavigateUserProfile = new NavigateUserProfileCommand(navStore, sessionUser);
             JoinGCPopupCommand = new OpenJoinGroupChatModalCommand(this);
             SendMessageCommand = new SendMessageCommand(this);
             OpenCreateThreadCommand = new OpenCreateThreadCommand(this);
@@ -220,6 +223,7 @@ namespace NEA_Main.ViewModels
                     {
                         if (msg.ChatThreadId == CurrentThread.Id)
                         {
+                            msg.SenderProfilePictureUrl ??= "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
                             messages.Add(msg);
                         }
                     }
@@ -233,12 +237,13 @@ namespace NEA_Main.ViewModels
             if (!string.IsNullOrEmpty(InputMessage) && CurrentThread != null)
             {
                 Message newMessage = new Message()
-                { 
+                {
                     Text = InputMessage,
                     TimeSent = TimeOnly.FromDateTime(DateTime.Now),
                     SenderId = SessionUser.Id,
                     SenderUsername = SessionUser.Username,
                     ChatThreadId = CurrentThread.Id,
+                    SenderProfilePictureUrl = SessionUser.ProfileImageUrl,
                     DateSent = DateTime.Now
                     
                 };

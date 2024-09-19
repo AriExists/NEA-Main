@@ -75,7 +75,7 @@
                 <Button Command="{Binding NavigateSettingsCommand}" Grid.Column="1">
                     <Image Source="/Assets/settings.png"/>
                 </Button>
-                <Button Grid.Column="3">
+                <Button Command="{Binding NavigateUserProfile}" Grid.Column="3">
                     <Image Source="/Assets/account.png"/>
                 </Button>
             </Grid>
@@ -124,8 +124,19 @@
                                 <TextBlock  Text="{Binding TimeSent}" FontSize="18" Foreground="{DynamicResource PrimaryTextColour}"/>
                             </WrapPanel>
 
-                            <TextBlock Text="{Binding Text}" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}"/>
-
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="8*" />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Width="40" Height="40">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding SenderProfilePictureUrl}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <TextBlock Grid.Column="2" Text="{Binding Text}" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}"/>
+                            </Grid>
                         </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>

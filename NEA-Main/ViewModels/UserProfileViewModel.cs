@@ -1,0 +1,107 @@
+﻿using NEA_Main.Commands;
+using NEA_Main.Data;
+using NEA_Main.Models.Generated;
+using NEA_Main.Stores;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+
+namespace NEA_Main.ViewModels
+{
+    public class UserProfileViewModel : ViewModelBase
+    {
+
+        private readonly NavStore _navStore;
+        private readonly AccountUser _sessionUser;
+
+        public ICommand NavigateMainAppCommand { get; set; }
+        public ICommand OpenEditProfilePopup { get; set; }
+
+        private string _profilePictureUrl;
+        public string ProfilePictureUrl
+        {
+            get => _profilePictureUrl;
+            set
+            {
+                _profilePictureUrl = value;
+                OnProperyChanged(nameof(ProfilePictureUrl));
+            }
+        }
+
+        private string _accountUsername;
+        public string AccountUsername
+        {
+            get { return _accountUsername; }
+            set 
+            {
+                _accountUsername = value;
+                OnProperyChanged(nameof(AccountUsername));
+            }
+        }
+
+
+
+        private Window? _openModal;
+        public Window? OpenModal
+        {
+            get => _openModal;
+            set
+            {
+                _openModal = value;
+                OnProperyChanged(nameof(OpenModal));
+            }
+        }
+
+        private ViewModelBase _openModalViewModel;
+        public ViewModelBase OpenModalViewModel
+        {
+            get => _openModalViewModel;
+            set
+            {
+                _openModalViewModel = value;
+                OnProperyChanged(nameof(OpenModalViewModel));
+            }
+        }
+
+        public void OpenNewModal(Window modal, ViewModelBase viewModel)
+        {
+            if (OpenModal != null)
+            {
+                OpenModal.Close();
+                OpenModal = null;
+            }
+
+            OpenModalViewModel = viewModel;
+            OpenModal = modal;
+            OpenModal.DataContext = OpenModalViewModel;
+            OpenModal.ShowDialog();
+          
+        }
+
+        public UserProfileViewModel(NavStore navStore, AccountUser sessionUser)
+        {
+            _navStore = navStore;
+            _sessionUser = sessionUser;
+            using (MasterContext context =  new MasterContext())
+            {
+                var currentUser = context.AccountUsers.Single(au => au.Id == sessionUser.Id);
+                AccountUsername = currentUser.Username;
+                if (currentUser.ProfileImageUrl == null)
+                {
+                    ProfilePictureUrl = "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
+                }
+                else
+                {
+                    ProfilePictureUrl = currentUser.ProfileImageUrl; 
+                }
+            }
+            NavigateMainAppCommand = new NavigateMainApp(navStore, sessionUser);
+            OpenEditProfilePopup = new OpenEditProfileModal(this, _sessionUser);
+        }
+
+    }
+}
