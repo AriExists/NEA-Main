@@ -31,7 +31,14 @@
                 <Button x:Name="EditBtn" Command="{Binding OpenEditProfilePopup}" Grid.Column="2" Width="100" Height="100" VerticalAlignment="Top" Margin="20" Content="Edit" FontSize="30"/>
             </Grid>
            <ItemsControl Grid.Row="2"> <!--put the list of joined group chats in here (button is for debug remove later)-->
-                <Button Height="50"/>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel FlowDirection="LeftToRight">
+                            <TextBlock Text="{Binding}" Foreground="{DynamicResource PrimaryTextColour}" FontSize="30"/>
+                            <TextBlock Text="{Binding}" Foreground="{DynamicResource PrimaryTextColour}" FontSize="30"/>
+                        </WrapPanel>    
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Grid>
             

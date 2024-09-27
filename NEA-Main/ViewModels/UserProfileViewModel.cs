@@ -4,6 +4,7 @@ using NEA_Main.Models.Generated;
 using NEA_Main.Stores;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,19 @@ namespace NEA_Main.ViewModels
             }
         }
 
+        private AccountUser _sesssionUser;
+
+        public AccountUser SessionYser
+        {
+            get { return _sesssionUser; }
+            set 
+            {
+                _sesssionUser = value;
+              
+            }
+        }
+
+
         public void OpenNewModal(Window modal, ViewModelBase viewModel)
         {
             if (OpenModal != null)
@@ -81,6 +95,18 @@ namespace NEA_Main.ViewModels
             OpenModal.ShowDialog();
           
         }
+
+        private ObservableCollection<GroupChat> _joinedChats;
+        public ObservableCollection<GroupChat> JoinedChats
+        {
+            get { return _joinedChats; }
+            set 
+            {
+                _joinedChats = value;
+                OnProperyChanged(nameof(JoinedChats));
+            }
+        }
+
 
         public UserProfileViewModel(NavStore navStore, AccountUser sessionUser)
         {

@@ -130,7 +130,7 @@
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="8*" />
                                 </Grid.ColumnDefinitions>
-                                <Ellipse Width="40" Height="40">
+                                <Ellipse Margin="0 0 10 0" Width="40" Height="40">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{Binding SenderProfilePictureUrl}"/>
                                     </Ellipse.Fill>
