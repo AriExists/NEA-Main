@@ -15,10 +15,17 @@
     <None Remove="Assets\Fonts\password.ttf" />
     <None Remove="Assets\groups.png" />
     <None Remove="Assets\phone.png" />
+    <None Remove="Assets\refresh.png" />
     <None Remove="Assets\send.png" />
     <None Remove="Assets\server.png" />
     <None Remove="Assets\settings.png" />
     <None Remove="Assets\thread.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +59,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NAudio" Version="2.2.1" />
   </ItemGroup>
 
   <ItemGroup>

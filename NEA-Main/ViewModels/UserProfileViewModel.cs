@@ -112,6 +112,7 @@ namespace NEA_Main.ViewModels
         {
             _navStore = navStore;
             _sessionUser = sessionUser;
+
             using (MasterContext context =  new MasterContext())
             {
                 var currentUser = context.AccountUsers.Single(au => au.Id == sessionUser.Id);
@@ -124,6 +125,11 @@ namespace NEA_Main.ViewModels
                 {
                     ProfilePictureUrl = currentUser.ProfileImageUrl; 
                 }
+
+                //foreach (var chat in joinedChats)
+                //{
+                   //finish this part 
+                //}
             }
             NavigateMainAppCommand = new NavigateMainApp(navStore, sessionUser);
             OpenEditProfilePopup = new OpenEditProfileModal(this, _sessionUser);

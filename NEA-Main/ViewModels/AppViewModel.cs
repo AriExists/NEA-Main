@@ -232,10 +232,15 @@ namespace NEA_Main.ViewModels
             });
         }
 
-        public void SendMessage()
+        public void SendMessage() // makes sure that the message is valid and has a destination then adds it to the active thread
         {
             if (!string.IsNullOrEmpty(InputMessage) && CurrentThread != null)
             {
+                if(InputMessage.Trim() == "")
+                {
+                    return;
+                }
+
                 Message newMessage = new Message()
                 {
                     Text = InputMessage,
