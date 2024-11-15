@@ -16,18 +16,18 @@
                 <RowDefinition Height="2*" />
             </Grid.RowDefinitions>
             <Label Content="Settings" Foreground="{DynamicResource PrimaryTextColour}" FontSize="48" HorizontalAlignment="Center"/>
-            <Label Content="Theme:" Foreground="{DynamicResource PrimaryTextColour}" FontSize="34" VerticalAlignment="Center" Grid.Row="1"/>
+            <Label Content="Theme" Foreground="{DynamicResource PrimaryTextColour}" FontSize="34" VerticalAlignment="Center" Grid.Row="1"/>
 
             <Button Command="{Binding NavigateStart}" Width="50" Height="50" Content="Back" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
             <Rectangle Fill="{DynamicResource PrimaryForegroundColour}" Grid.Row="2" Margin="18" RadiusX="8" RadiusY="8"/>
             <UniformGrid Margin="20" Rows="1" Columns="6" Grid.Row="2" Background="{DynamicResource PrimaryForegroundColour}" VerticalAlignment="Center">
 
-                <Button Command="{Binding ChangeThemeCmd}" Content="Azure" CommandParameter="Azure" Grid.Row="2" Background="Blue" Width="50" Height="50" HorizontalAlignment="Center"/>
-                <Button Command="{Binding ChangeThemeCmd}" Content="Haze" CommandParameter="Haze" Grid.Row="2" Background="Purple" Width="50" Height="50" HorizontalAlignment="Center"/>
-                <Button Command="{Binding ChangeThemeCmd}" Content="Maroon" CommandParameter="Maroon" Grid.Row="2" Background="Maroon" Width="50" Height="50" HorizontalAlignment="Center"/>
-                <Button Command="{Binding ChangeThemeCmd}" Content="Night" CommandParameter="Night" Grid.Row="2" Background="#092635" Width="50" Height="50" HorizontalAlignment="Center"/>
-                <Button Command="{Binding ChangeThemeCmd}" Content="Moss" CommandParameter="Moss" Grid.Row="2" Background="#618264" Width="50" Height="50" HorizontalAlignment="Center"/>
-                <Button Command="{Binding ChangeThemeCmd}" Content="Sunburn" CommandParameter="Sunburn" Grid.Row="2" Background="#A04747" Width="50" Height="50" HorizontalAlignment="Center"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Azure" CommandParameter="Azure" Grid.Row="2" Background="Blue" Width="110" Height="50" HorizontalAlignment="Center" FontSize="20"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Haze" CommandParameter="Haze" Grid.Row="2" Background="Purple" Width="110" Height="50" HorizontalAlignment="Center" FontSize="20"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Maroon" CommandParameter="Maroon" Grid.Row="2" Background="Maroon" Width="110" Height="50" HorizontalAlignment="Center" FontSize="20"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Night" CommandParameter="Night" Grid.Row="2" Background="#092635" Width="110" Height="50" HorizontalAlignment="Center" FontSize="20"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Moss" CommandParameter="Moss" Grid.Row="2" Background="#618264" Width="110" Height="50" HorizontalAlignment="Center" FontSize="20"/>
+                <Button Command="{Binding ChangeThemeCmd}" Content="Sunburn" CommandParameter="Sunburn" Grid.Row="2" Background="#A04747" Width="110" Height="50" HorizontalAlignment="Center" FontSize="20"/>
 
             </UniformGrid>
         </Grid>

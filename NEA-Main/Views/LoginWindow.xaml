@@ -40,9 +40,9 @@
             <Label Content="Password" Grid.Column="1" Grid.Row="2" FontSize="34" VerticalAlignment="Bottom" Foreground="{DynamicResource PrimaryTextColour}"/>
             <TextBox x:Name="PasswordInput" Text="{Binding InputPassword}" Foreground="{DynamicResource PrimaryTextColour}" Grid.Column="1" Grid.Row="3" Height="80" VerticalAlignment="Top" FontSize="46" FontFamily="{StaticResource Password}" />
             <Button Grid.Column="1" Grid.Row="4" Width="400" Height="80" Content="Login" FontSize="40" Command="{Binding TryLoginCommand}"/>
+            <TextBlock Text="{Binding Result}" Grid.Row="5" Grid.Column="1" FontSize="26" Foreground="Red"/>
         </Grid>
         <Button  Content="Back" Margin="20" FontSize="40" Command="{Binding NavigateStart}" />
-        <TextBlock Text="{Binding Result}" Grid.Row="2" Grid.Column="1" FontSize="42" Foreground="Red"/>
 
 
     </Grid>

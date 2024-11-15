@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NEA_Main.Views" xmlns:viewmodels="clr-namespace:NEA_Main.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:CreateGroupChatViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1200">
+             d:DesignHeight="700" d:DesignWidth="1200">
     <Grid Background="{DynamicResource PrimaryBackgroundColour}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
@@ -32,11 +32,11 @@
                 <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Button Command="{Binding NavigateBack}" Content="Back" FontSize="34" HorizontalAlignment="Left" Margin="6" MinWidth="150"/>
-            <Label Content="Create Groupchat" FontSize="60" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Center"/>
-            <Label Content="Groupchat name:" Grid.Row="2" Grid.Column="1" FontSize="34" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
+            <Label Content="Create Groupchat" FontSize="50" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Center"/>
+            <Label Content="Groupchat name:" Grid.Row="2" Grid.Column="1" FontSize="30" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
             <TextBlock Grid.Row="2" Foreground="{Binding ResponseColour}" FontSize="30" VerticalAlignment="Bottom" Margin="30 15" Text="{Binding Result}"/>
             <TextBox Text="{Binding GroupChatName, UpdateSourceTrigger=PropertyChanged}" FontSize="40" Grid.Row="2" VerticalAlignment="Center" Height="80" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
-            <Label Content="Groupchat description:" Grid.Row="3" Grid.Column="1" FontSize="34" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
+            <Label Content="Groupchat description:" Grid.Row="3" Grid.Column="1" FontSize="30" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"/>
             <TextBox Text="{Binding GroupChatDescription, UpdateSourceTrigger=PropertyChanged}" FontSize="40" Grid.Row="3" VerticalAlignment="Center" Height="140" Margin="30 0" Foreground="{DynamicResource PrimaryTextColour}"></TextBox>
             <Button Command="{Binding CreateGroupChat}" Grid.Row="5" FontSize="34" Width="250" HorizontalAlignment="Left" Margin="30 0" Content="Create"/>
         </Grid>

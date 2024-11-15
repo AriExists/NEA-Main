@@ -79,6 +79,11 @@ namespace NEA_Main.ViewModels
                 Result = "Incorrect username or password";
                 return null;
             }
+            else
+            {
+                Result = "Please enter all info";
+            }
+
             return null;
         }
 
