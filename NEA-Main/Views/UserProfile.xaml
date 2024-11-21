@@ -29,17 +29,29 @@
                 </Ellipse>
                 <Label Grid.Column="1" Content="{Binding AccountUsername}" Foreground="{DynamicResource PrimaryTextColour}" FontSize="60"/>
                 <Button x:Name="EditBtn" Command="{Binding OpenEditProfilePopup}" Grid.Column="2" Width="100" Height="100" VerticalAlignment="Top" Margin="20" Content="Edit" FontSize="30"/>
+           </Grid>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="8*" />
+                </Grid.RowDefinitions>
+                
+                <Label Content="JoinedChats" Panel.ZIndex="2" FontSize="30" Grid.Row="0" Foreground="{DynamicResource PrimaryTextColour}"/>
+                <ListBox Grid.Row="1" ItemsSource="{Binding JoinedChats}" Background="{DynamicResource SecondaryBackgroundColour}"> <!--put the list of joined group chats in here (button is for debug remove later)-->
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel> 
+                                <TextBlock Text="{Binding}" Foreground="{DynamicResource PrimaryTextColour}" FontSize="26"/>
+                            </StackPanel>    
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Label Content="Bio" Panel.ZIndex="2" FontSize="30" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource PrimaryTextColour}"/>
             </Grid>
-           <ItemsControl Grid.Row="2"> <!--put the list of joined group chats in here (button is for debug remove later)-->
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <WrapPanel FlowDirection="LeftToRight">
-                            <TextBlock Text="{Binding}" Foreground="{DynamicResource PrimaryTextColour}" FontSize="30"/>
-                            <TextBlock Text="{Binding}" Foreground="{DynamicResource PrimaryTextColour}" FontSize="30"/>
-                        </WrapPanel>    
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
         </Grid>
             
     </Grid>

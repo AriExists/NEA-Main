@@ -44,8 +44,6 @@ namespace NEA_Main.ViewModels
             }
         }
 
-
-
         private Window? _openModal;
         public Window? OpenModal
         {
@@ -96,8 +94,8 @@ namespace NEA_Main.ViewModels
           
         }
 
-        private ObservableCollection<GroupChat> _joinedChats;
-        public ObservableCollection<GroupChat> JoinedChats
+        private ObservableCollection<string> _joinedChats;
+        public ObservableCollection<string> JoinedChats
         {
             get { return _joinedChats; }
             set 
@@ -113,6 +111,7 @@ namespace NEA_Main.ViewModels
             _navStore = navStore;
             _sessionUser = sessionUser;
 
+            JoinedChats = new ObservableCollection<string>();
             using (MasterContext context =  new MasterContext())
             {
                 var currentUser = context.AccountUsers.Single(au => au.Id == sessionUser.Id);
@@ -125,15 +124,20 @@ namespace NEA_Main.ViewModels
                 {
                     ProfilePictureUrl = currentUser.ProfileImageUrl; 
                 }
+                
+                var UserchatRelation = context.AccountUserGroupChats
+                    .Where(cr => cr.AccountUserId == sessionUser.Id).ToList();
 
-                //foreach (var chat in joinedChats)
-                //{
-                   //finish this part 
-                //}
+                foreach (var link in UserchatRelation)
+                {
+                    var chat = context.GroupChats.Single(c => c.Id == link.GroupChatId).Name.ToString();
+                    JoinedChats.Add(chat);
+                }
+                ObservableCollection<string> temp = new ObservableCollection<string>();
+                OnProperyChanged(nameof(OnProperyChanged));
             }
             NavigateMainAppCommand = new NavigateMainApp(navStore, sessionUser);
             OpenEditProfilePopup = new OpenEditProfileModal(this, _sessionUser);
         }
-
     }
 }
