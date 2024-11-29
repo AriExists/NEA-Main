@@ -68,7 +68,7 @@ namespace NEA_Main.ViewModels
 
         private AccountUser _sesssionUser;
 
-        public AccountUser SessionYser
+        public AccountUser SessionUser
         {
             get { return _sesssionUser; }
             set 
@@ -105,6 +105,14 @@ namespace NEA_Main.ViewModels
             }
         }
 
+        private string _userBio;
+        public string UserBio
+        {
+            get { return _userBio; }
+            set { _userBio = value; }
+        }
+
+
 
         public UserProfileViewModel(NavStore navStore, AccountUser sessionUser)
         {
@@ -116,6 +124,7 @@ namespace NEA_Main.ViewModels
             {
                 var currentUser = context.AccountUsers.Single(au => au.Id == sessionUser.Id);
                 AccountUsername = currentUser.Username;
+                UserBio = currentUser.Bio;
                 if (currentUser.ProfileImageUrl == null)
                 {
                     ProfilePictureUrl = "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
@@ -124,7 +133,7 @@ namespace NEA_Main.ViewModels
                 {
                     ProfilePictureUrl = currentUser.ProfileImageUrl; 
                 }
-                
+
                 var UserchatRelation = context.AccountUserGroupChats
                     .Where(cr => cr.AccountUserId == sessionUser.Id).ToList();
 

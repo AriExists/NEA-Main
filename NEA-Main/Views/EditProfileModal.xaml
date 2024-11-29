@@ -5,19 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NEA_Main.Views" xmlns:viewmodels="clr-namespace:NEA_Main.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditProfileViewModel}"
         mc:Ignorable="d"
-        Title="EditProfileModal" Height="400" Width="400">
+        Title="EditProfileModal" Height="600" Width="600">
     <Grid Background="{DynamicResource PrimaryBackgroundColour}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
             <RowDefinition Height="2*" />
             <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Label Content="Edit Profile" FontSize="32" Foreground="{DynamicResource PrimaryTextColour}"/>
         <Label Content="Change Profile Picture" Grid.Row="1" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}"/>
         <TextBox Text="{Binding NewProfilePictureUrl}"  Grid.Row="2" Height="50" VerticalAlignment="Center" Margin="20 0" />
         <Button Command="{Binding EditProfileCommand}" Content="Set Profile picture" Grid.Row="3" Width="150" HorizontalAlignment="Left" Margin="20 0" FontSize="16"/>
-        <TextBlock Text="{Binding Result}" FontSize="30" Foreground="Green" Grid.Row="4"/>
+        <TextBlock Text="{Binding Result}" FontSize="30" Foreground="Green" Grid.Row="8"/>
+        <Label Content="Change Bio" Grid.Row="5" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}"/>
+        <TextBox Text="{Binding NewBio}" FontSize="26" Foreground="{DynamicResource PrimaryTextColour}"  Grid.Row="6" Height="120" VerticalAlignment="Center" Margin="20 0" />
+        <Button Command="{Binding EditBioCommand}" Content="Set Bio" Grid.Row="7" Width="150" HorizontalAlignment="Left" Margin="20 0" FontSize="20"/>
+        
     </Grid>
 </Window>

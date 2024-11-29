@@ -34,4 +34,5 @@ public partial class Message
     [ForeignKey("SenderId")]
     [InverseProperty("Messages")]
     public virtual AccountUser Sender { get; set; } = null!;
+    //public string? SenderBio { get; internal set; }
 }

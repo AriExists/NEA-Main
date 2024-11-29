@@ -13,6 +13,7 @@ namespace NEA_Main.ViewModels
     public class EditProfileViewModel : ViewModelBase
     {
         public ICommand EditProfileCommand { get; set; }
+		public ICommand EditBioCommand { get; set; }
 		private string? newProfilePictureUrl;
 
 		public string NewProfilePictureUrl
@@ -32,7 +33,20 @@ namespace NEA_Main.ViewModels
 			}
 		}
 
-        private string _result;
+		private string _newBio;
+
+		public string NewBio
+		{
+			get { return _newBio; }
+			set 
+			{
+				_newBio = value;
+				OnProperyChanged(nameof(NewBio));
+			}
+		}
+
+
+		private string _result;
 
         public string Result    
         {
@@ -48,6 +62,7 @@ namespace NEA_Main.ViewModels
         {
             _sessionUser = sessionUser;
             EditProfileCommand = new UpdateProfile(this, _sessionUser);
+			EditBioCommand = new UpdateBio(this, _sessionUser);
         }
 
 

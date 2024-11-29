@@ -213,13 +213,14 @@ namespace NEA_Main.ViewModels
         {
 
             
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 updateGroupChatSelector();
                 if (CurrentThread != null)
                 {
                     var messages = new ObservableCollection<Message>();
-                    foreach (Message msg in context.Messages)
+                    var ServerMessages = await (from a in context.Messages select a).ToListAsync();
+                    foreach (Message msg in ServerMessages)
                     {
                         if (msg.ChatThreadId == CurrentThread.Id)
                         {
@@ -241,7 +242,7 @@ namespace NEA_Main.ViewModels
                     return;
                 }
 
-                Message newMessage = new Message()
+                Message newMessage = new Message() // Add sender bio
                 {
                     Text = InputMessage,
                     TimeSent = TimeOnly.FromDateTime(DateTime.Now),
@@ -249,7 +250,8 @@ namespace NEA_Main.ViewModels
                     SenderUsername = SessionUser.Username,
                     ChatThreadId = CurrentThread.Id,
                     SenderProfilePictureUrl = SessionUser.ProfileImageUrl,
-                    DateSent = DateTime.Now
+                    DateSent = DateTime.Now,
+                    //SenderBio = SessionUser.Bio
                     
                 };
                 context.Add(newMessage);

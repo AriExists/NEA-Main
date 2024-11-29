@@ -41,7 +41,7 @@
                 </Grid.RowDefinitions>
                 
                 <Label Content="JoinedChats" Panel.ZIndex="2" FontSize="30" Grid.Row="0" Foreground="{DynamicResource PrimaryTextColour}"/>
-                <ListBox Grid.Row="1" ItemsSource="{Binding JoinedChats}" Background="{DynamicResource SecondaryBackgroundColour}"> <!--put the list of joined group chats in here (button is for debug remove later)-->
+                <ListBox Grid.Row="1" ItemsSource="{Binding JoinedChats}" Background="{DynamicResource SecondaryBackgroundColour}" BorderThickness="0"> <!--put the list of joined group chats in here (button is for debug remove later)-->
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel> 
@@ -50,7 +50,8 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <Label Content="Bio" Panel.ZIndex="2" FontSize="30" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource PrimaryTextColour}"/>
+                <Label Content="Bio" Panel.ZIndex="2" FontSize="30" Grid.Column="1" Grid.Row="0" Foreground="{DynamicResource PrimaryTextColour}"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Foreground="{DynamicResource PrimaryTextColour}" Text="{Binding UserBio}" FontSize="24"> </TextBlock>
             </Grid>
         </Grid>
             
