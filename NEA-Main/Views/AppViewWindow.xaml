@@ -109,28 +109,79 @@
             </Grid>
             <TextBlock FontSize="24" Height="40" Text="{Binding CurrentGroupChat.JoinId}" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Panel.ZIndex="1" Grid.Row="1"/>
             <TextBlock FontSize="24" Height="40" Text="Join Code:" Foreground="{DynamicResource PrimaryTextColour}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="70 10" Panel.ZIndex="1" Grid.Row="1"/>
-            <ListBox x:Name="ChatContainer" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Background="{DynamicResource PrimaryForegroundColour}" Grid.Row="1" Margin="15">
+            <ListBox x:Name="ChatContainer" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" ItemsSource="{Binding Messages, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Background="{DynamicResource PrimaryForegroundColour}" Grid.Row="1" Margin="15">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <WrapPanel FlowDirection="LeftToRight">
+                            <WrapPanel FlowDirection="LeftToRight" ToolTipService.IsEnabled="True" ToolTipService.ToolTip="{Binding SenderBio}">
                                 <TextBlock Text="{Binding SenderUsername}" FontSize="18" Foreground="{DynamicResource PrimaryTextColour}"/>
                                 <TextBlock Text="   "/>
-                                <TextBlock  Text="{Binding TimeSent}" FontSize="18" Foreground="{DynamicResource PrimaryTextColour}"/>
+                                <TextBlock Text="{Binding DateSent}" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource PrimaryTextColour}"/>
                             </WrapPanel>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="2*" />
                                     <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="8*" />
+                                    <ColumnDefinition Width="8*" >
+                                        <ColumnDefinition.Style>
+                                            <Style>
+                                                <Style.Triggers>
+                                               </Style.Triggers>
+                                            </Style>
+                                        </ColumnDefinition.Style>    
+                                    </ColumnDefinition>
+
                                 </Grid.ColumnDefinitions>
-                                <Ellipse Margin="0 0 10 0" Width="40" Height="40">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition>
+                                        <RowDefinition.Style>
+                                            <Style TargetType="RowDefinition">
+                                                <Setter Property="Height" Value="*"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=HasImage}" Value="false">
+                                                        <Setter Property="Height" Value="0"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </RowDefinition.Style>
+                                    </RowDefinition>
+                                    
+                                </Grid.RowDefinitions>
+                                <Ellipse Margin="0 0 10 0" Width="40" Height="40" Panel.ZIndex="6" ToolTipService.IsEnabled="True" ToolTipService.ToolTip="{Binding SenderBio}">
                                     <Ellipse.Fill>
                                         <ImageBrush ImageSource="{Binding SenderProfilePictureUrl}"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <TextBlock Grid.Column="2" Text="{Binding Text}" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}"/>
+                                
+                                <TextBlock Grid.Column="2" Text="{Binding Text}" FontSize="24" Foreground="{DynamicResource PrimaryTextColour}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=HasImage}" Value="True">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+
+                                <Rectangle Visibility="Visible" Width="200" Height="200" Grid.Row="1" Grid.Column="2">
+                                    <Rectangle.Fill>
+                                        <ImageBrush ImageSource="{Binding ImageUrl}"/>
+                                    </Rectangle.Fill>
+                                    <Rectangle.Style>
+                                        <Style TargetType="Rectangle">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=HasImage}" Value="False">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Rectangle.Style> 
+                                </Rectangle>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>

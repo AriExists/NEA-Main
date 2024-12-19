@@ -27,6 +27,8 @@ public partial class Message
 
     public string? SenderProfilePictureUrl { get; set; }
 
+    public string? SenderBio { get; set; }
+
     [ForeignKey("ChatThreadId")]
     [InverseProperty("Messages")]
     public virtual ChatThread ChatThread { get; set; } = null!;
@@ -34,5 +36,4 @@ public partial class Message
     [ForeignKey("SenderId")]
     [InverseProperty("Messages")]
     public virtual AccountUser Sender { get; set; } = null!;
-    //public string? SenderBio { get; internal set; }
 }

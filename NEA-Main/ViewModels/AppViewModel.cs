@@ -19,6 +19,9 @@ using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using NEA_Main.Models.Generated;
+using System.Windows.Forms;
+using Message = NEA_Main.Models.Generated.Message;
+using Microsoft.IdentityModel.Tokens;
 
 namespace NEA_Main.ViewModels
 {
@@ -209,6 +212,7 @@ namespace NEA_Main.ViewModels
             await UpdateChat();
         }
 
+        ObservableCollection<Message> previousChatUpdate;
         public async Task UpdateChat()
         {
 
@@ -222,13 +226,60 @@ namespace NEA_Main.ViewModels
                     var ServerMessages = await (from a in context.Messages select a).ToListAsync();
                     foreach (Message msg in ServerMessages)
                     {
+
+                        var MessageInfo = new DisplayMessage
+                            {
+                                SenderProfilePictureUrl = msg.SenderProfilePictureUrl,
+                                SenderUsername = msg.SenderUsername,
+                                TimeSent = msg.TimeSent,
+                                DateSent = msg.DateSent,
+                                Text = msg.Text,
+                                HasImage = false,
+                                ImageUrl = ""
+                            };
+
+                        
+                        if (!msg.SenderBio.IsNullOrEmpty())
+                        {
+                            MessageInfo.SenderBio = msg.SenderBio;
+                        }
+                        else
+                        {
+                            MessageInfo.SenderBio = "user has no bio";
+                        }
+                   
+
                         if (msg.ChatThreadId == CurrentThread.Id)
                         {
-                            msg.SenderProfilePictureUrl ??= "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
-                            messages.Add(msg);
+                                                    msg.SenderProfilePictureUrl ??= "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
+                            
+                            if (msg.Text.ToLower().Trim().StartsWith("img:")) 
+                            {
+                                MessageInfo.ImageUrl = msg.Text.Trim().Substring(4);
+                                MessageInfo.HasImage = true;
+                                MessageInfo.Text = "";
+                                messages.Add(MessageInfo);
+                                 
+                            }
+                            else
+                            {
+                                messages.Add(MessageInfo);
+                            }
                         }
                     }
-                    Messages = messages;
+                    if (previousChatUpdate != null)
+                    {
+                        if (previousChatUpdate.Count != messages.Count)
+                        {
+                            Messages = messages;
+                            previousChatUpdate = messages;
+                        }
+                    }
+                    else
+                    {
+                            Messages = messages;
+                            previousChatUpdate = messages;
+                    }
                 }
             });
         }
@@ -242,17 +293,17 @@ namespace NEA_Main.ViewModels
                     return;
                 }
 
-                Message newMessage = new Message() // Add sender bio
+                Message newMessage = new Message() 
                 {
                     Text = InputMessage,
                     TimeSent = TimeOnly.FromDateTime(DateTime.Now),
                     SenderId = SessionUser.Id,
                     SenderUsername = SessionUser.Username,
+                    SenderBio = SessionUser.Bio,
                     ChatThreadId = CurrentThread.Id,
                     SenderProfilePictureUrl = SessionUser.ProfileImageUrl,
-                    DateSent = DateTime.Now,
-                    //SenderBio = SessionUser.Bio
-                    
+                    DateSent = DateTime.Now
+                                        
                 };
                 context.Add(newMessage);
                 context.SaveChanges();
