@@ -239,7 +239,7 @@ namespace NEA_Main.ViewModels
                             };
 
                         
-                        if (!msg.SenderBio.IsNullOrEmpty())
+                        if (msg.SenderBio != null)
                         {
                             MessageInfo.SenderBio = msg.SenderBio;
                         }
@@ -251,7 +251,7 @@ namespace NEA_Main.ViewModels
 
                         if (msg.ChatThreadId == CurrentThread.Id)
                         {
-                                                    msg.SenderProfilePictureUrl ??= "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
+                            msg.SenderProfilePictureUrl ??= "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
                             
                             if (msg.Text.ToLower().Trim().StartsWith("img:")) 
                             {
