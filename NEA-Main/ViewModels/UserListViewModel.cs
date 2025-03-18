@@ -35,7 +35,7 @@ namespace NEA_Main.ViewModels
             }
         }
         MasterContext context = new MasterContext();
-        public UserListViewModel(AppViewModel parentViewModel)
+        public UserListViewModel(AppViewModel parentViewModel) 
         {
             _parentViewModel = parentViewModel;
             RefreshUserList = new RefreshUserListCommand(_parentViewModel, this);
@@ -43,7 +43,7 @@ namespace NEA_Main.ViewModels
             
         }
 
-        public void RefreshUsers()
+        public void RefreshUsers() // clears the current list of users and gets a new one from the database
         {
             List<int> AddIds = new List<int>();
             if (_parentViewModel.CurrentGroupChat != null)
@@ -58,7 +58,7 @@ namespace NEA_Main.ViewModels
             }
 
 
-            if (_parentViewModel.CurrentGroupChat != null)
+            if (_parentViewModel.CurrentGroupChat != null) // if there is no selected groupchat there is no need to look for users
             {
                 List<string> NewUserList = new List<string>();
                 foreach (AccountUser u in context.AccountUsers)

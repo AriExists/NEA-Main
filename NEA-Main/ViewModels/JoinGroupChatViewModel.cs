@@ -45,7 +45,7 @@ namespace NEA_Main.ViewModels
                 OnProperyChanged(nameof(ResponseColour));
             }
         }
-        public JoinGroupChatViewModel(AppViewModel parentVM)
+        public JoinGroupChatViewModel(AppViewModel parentVM) // constructor sets default ResponseColour and instantiates the JoinGroupchat command
         {
             _responseColour = System.Windows.Media.Brushes.Red;
             ResponseColour = _responseColour;

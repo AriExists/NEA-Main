@@ -38,7 +38,9 @@ namespace NEA_Main.ViewModels
         public ICommand OpenCreateThreadCommand { get; set; }
         public ICommand RefreshUserListCommand { get; set; }
 
-        private DispatcherTimer _timer;
+        // property setup
+        private DispatcherTimer _timer; // creates a timer sends a tick even at every set interval
+                                        // will use to update the messages regularly.
 
         public GroupChat? CurrentGroupChat
         {
@@ -134,6 +136,7 @@ namespace NEA_Main.ViewModels
             }
         }
 
+        // app viewModel constructor instantiates commands, sets up timer and calls update functions.
         public AppViewModel(NavStore navStore, AccountUser sessionUser)
         {
             _timer = new DispatcherTimer();
@@ -185,7 +188,7 @@ namespace NEA_Main.ViewModels
             OpenModal = null;
 
         }
-
+        // updates the available options for the groupchat selector
         public void updateGroupChatSelector()
         {
             var joinedGCs = new ObservableCollection<GroupChat>();
@@ -207,7 +210,7 @@ namespace NEA_Main.ViewModels
             }
         }
 
-        private async void Update_Tick(object sender, EventArgs e)
+        private async void Update_Tick(object sender, EventArgs e) //updates the messages in the currently open thread
         {
             await UpdateChat();
         }
@@ -227,7 +230,8 @@ namespace NEA_Main.ViewModels
                     foreach (Message msg in ServerMessages)
                     {
 
-                        var MessageInfo = new DisplayMessage
+                        var MessageInfo = new DisplayMessage // creates a container object which stores the data from the message retreived from the server
+                                                            // this is so extra data can be added/ changed without affecting the data on the database.
                             {
                                 SenderProfilePictureUrl = msg.SenderProfilePictureUrl,
                                 SenderUsername = msg.SenderUsername,
@@ -249,7 +253,7 @@ namespace NEA_Main.ViewModels
                         }
                    
 
-                        if (msg.ChatThreadId == CurrentThread.Id)
+                        if (msg.ChatThreadId == CurrentThread.Id) 
                         {
                             msg.SenderProfilePictureUrl ??= "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
                             
@@ -338,7 +342,7 @@ namespace NEA_Main.ViewModels
             }
         }
 
-        public void UpdateCurrentGroupChatThreads()
+        public void UpdateCurrentGroupChatThreads() // notifies the view of available threads within the selected groupchat
         {
             CurrentChatThreads = new ObservableCollection<ChatThread>();
             if (CurrentGroupChat != null)
@@ -353,13 +357,13 @@ namespace NEA_Main.ViewModels
             }
         }
 
-        MasterContext context = new MasterContext();
+        MasterContext context = new MasterContext(); // sets up access to the server
         private int _groupChatJoincode;
         private OutputResult _out;
         private GroupChat _targetGroupchat;
         public OutputResult JoinGroupChat(string code)
         {
-            if (string.IsNullOrEmpty(code))
+            if (string.IsNullOrEmpty(code)) // join code validation
             {
                 _out = new OutputResult("No ID input", System.Windows.Media.Brushes.Red);
                 return _out;

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// This file is supposed to be in the commands namespace but I put it here by accident
+// I didnt change it as many files reference it at this location, which would be tedious to fix
 namespace NEA_Main.ViewModels
 {
     class NavigateMainApp : CommandBase
@@ -22,7 +24,7 @@ namespace NEA_Main.ViewModels
 
         public override void Execute(object? parameter)
         {
-            _navStore.CurrentViewModel = new AppViewModel(_navStore, _sessionUser);
+            _navStore.CurrentViewModel = new AppViewModel(_navStore, _sessionUser); // navigates the user to the main app
         }
     }
 }

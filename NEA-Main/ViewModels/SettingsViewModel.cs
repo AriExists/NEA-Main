@@ -25,7 +25,7 @@ namespace NEA_Main.ViewModels
        
 
        
-        public SettingsViewModel(NavStore navStore, AccountUser sessionUser)
+        public SettingsViewModel(NavStore navStore, AccountUser sessionUser) 
         {
             ChangeThemeCmd = new ChangeThemeCommand(this);
             NavigateStart = new NavigateMainApp(navStore, sessionUser);
@@ -33,7 +33,8 @@ namespace NEA_Main.ViewModels
 
         public void ChangeTheme(object themeButtonPressed)
         {
-            switch (Convert.ToString(themeButtonPressed))
+            switch (Convert.ToString(themeButtonPressed)) // input depends on the theme button pressed in view
+                                                        // changes the resource dictionary used for colouring UI elements
             {
                 case "Azure":
                     System.Windows.Application.Current.Resources.Source = new Uri("pack://application:,,,/Styles/AzureTheme.xaml");        

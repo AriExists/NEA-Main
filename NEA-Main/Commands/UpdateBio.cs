@@ -24,8 +24,8 @@ namespace NEA_Main.Commands
         {
            using (MasterContext context = new MasterContext())
            {
-                var TargetUser = context.AccountUsers.Single(au => au.Id == _sessionUser.Id);
-                TargetUser.Bio = _parentViewModel.NewBio;
+                var TargetUser = context.AccountUsers.Single(au => au.Id == _sessionUser.Id); // queries database for current user
+                TargetUser.Bio = _parentViewModel.NewBio; // etits the bio of the selected account
                 context.SaveChanges();
 
                 _parentViewModel.OutputResult("Bio Updated");

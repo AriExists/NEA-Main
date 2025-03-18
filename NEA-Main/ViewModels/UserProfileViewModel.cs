@@ -15,7 +15,7 @@ namespace NEA_Main.ViewModels
 {
     public class UserProfileViewModel : ViewModelBase
     {
-
+        // property setup
         private readonly NavStore _navStore;
         private readonly AccountUser _sessionUser;
 
@@ -78,7 +78,7 @@ namespace NEA_Main.ViewModels
             }
         }
 
-
+// closes existing popup, stores new popup from passed in objects
         public void OpenNewModal(Window modal, ViewModelBase viewModel)
         {
             if (OpenModal != null)
@@ -90,7 +90,7 @@ namespace NEA_Main.ViewModels
             OpenModalViewModel = viewModel;
             OpenModal = modal;
             OpenModal.DataContext = OpenModalViewModel;
-            OpenModal.ShowDialog();
+            OpenModal.ShowDialog(); // displays the viewModel
           
         }
 
@@ -122,11 +122,12 @@ namespace NEA_Main.ViewModels
             JoinedChats = new ObservableCollection<string>();
             using (MasterContext context =  new MasterContext())
             {
-                var currentUser = context.AccountUsers.Single(au => au.Id == sessionUser.Id);
+                var currentUser = context.AccountUsers.Single(au => au.Id == sessionUser.Id); // queries database for current users' data
                 AccountUsername = currentUser.Username;
                 UserBio = currentUser.Bio;
                 if (currentUser.ProfileImageUrl == null)
                 {
+                    //sets default profile picture (taken from a stock site)
                     ProfilePictureUrl = "https://play-lh.googleusercontent.com/z-ppwF62-FuXHMO7q20rrBMZeOnHfx1t9UPkUqtyouuGW7WbeUZECmyeNHAus2Jcxw=w526-h296-rw";
                 }
                 else
@@ -135,14 +136,15 @@ namespace NEA_Main.ViewModels
                 }
 
                 var UserchatRelation = context.AccountUserGroupChats
-                    .Where(cr => cr.AccountUserId == sessionUser.Id).ToList();
+                    .Where(cr => cr.AccountUserId == sessionUser.Id).ToList(); // queries database for the Ids of all GroupChat the user is in 
 
                 foreach (var link in UserchatRelation)
                 {
-                    var chat = context.GroupChats.Single(c => c.Id == link.GroupChatId).Name.ToString();
+                    var chat = context.GroupChats.Single(c => c.Id == link.GroupChatId).Name.ToString(); // queries database for the names of the groupchats that
+                                                                                                        // the user is in.
                     JoinedChats.Add(chat);
                 }
-                ObservableCollection<string> temp = new ObservableCollection<string>();
+                ObservableCollection<string> temp = new ObservableCollection<string>(); // creates a temporary list which will be moved to another property before being displayed.
                 OnProperyChanged(nameof(OnProperyChanged));
             }
             NavigateMainAppCommand = new NavigateMainApp(navStore, sessionUser);

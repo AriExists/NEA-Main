@@ -15,10 +15,11 @@ namespace NEA_Main.ViewModels
 {
     public class CreateGroupChatViewModel : ViewModelBase
     {
+        // property setup
         public ICommand NavigateBack{  get; set; }
         public ICommand CreateGroupChat { get; set; }
         private Random _rnd = new Random();
-        internal MasterContext context = new MasterContext();
+        internal MasterContext context = new MasterContext(); // sets up access to server
 
         private readonly AccountUser _sessionUser;
 
@@ -79,7 +80,7 @@ namespace NEA_Main.ViewModels
 
         private int joinId;
         private bool validID;
-        public void TryCreateGroupChat()
+        public void TryCreateGroupChat() // validates input, if valid adds groupchat to database
         {
             if (!string.IsNullOrEmpty(GroupChatName))
             {

@@ -26,8 +26,8 @@ namespace NEA_Main.Commands
         {
            using (MasterContext context = new MasterContext())
            {
-                var TargetUser = context.AccountUsers.Single(au => au.Id == _sessionUser.Id);
-                TargetUser.ProfileImageUrl = _parentViewModel.NewProfilePictureUrl;
+                var TargetUser = context.AccountUsers.Single(au => au.Id == _sessionUser.Id); // queries the database for current user
+                TargetUser.ProfileImageUrl = _parentViewModel.NewProfilePictureUrl; // edits the user's record, changing their profile picture url
                 context.SaveChanges();
 
                 _parentViewModel.OutputResult("Profile picture updated");

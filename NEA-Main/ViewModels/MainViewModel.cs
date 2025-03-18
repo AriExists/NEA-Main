@@ -13,9 +13,9 @@ namespace NEA_Main.ViewModels
     {
         private readonly NavStore _navsStore;
 
-        public ViewModelBase? CurrentViewModel => _navsStore.CurrentViewModel;
+        public ViewModelBase? CurrentViewModel => _navsStore.CurrentViewModel; // gets current view model from the navstore
 
-        public MainViewModel(NavStore navStore)
+        public MainViewModel(NavStore navStore) // constructor subscrives a the view modle changed function to a navstore event.
         {
             _navsStore = navStore;
             _navsStore.CurrentViewModleChanged += OnCurrentViewModelChanged;

@@ -17,6 +17,7 @@ namespace NEA_Main.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        // property set up
         public ICommand? NavigateStart { get; }
         public ICommand? TryLoginCommand { get; }
         private readonly NavStore _navStore;
@@ -62,7 +63,8 @@ namespace NEA_Main.ViewModels
 
         MasterContext context = new MasterContext();
 
-        public AccountUser? TryLogin()
+        public AccountUser? TryLogin() // validates user input then attempts to find a user with a matching username
+                                    // then compares passwords. If all checks succeed the user is navigated to the main chat page.
         {
             if (!string.IsNullOrEmpty(InputPassword) && !string.IsNullOrEmpty(InputUserName))
             {
@@ -88,7 +90,7 @@ namespace NEA_Main.ViewModels
         }
 
 
-        public void CompleteLogin(AccountUser user)
+        public void CompleteLogin(AccountUser user) // navigation function triggered by command
         {
 
             SessionUserStore sessionUser = new SessionUserStore(user);

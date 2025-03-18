@@ -16,6 +16,7 @@ namespace NEA_Main.ViewModels
 {
     public class CreateThreadViewModel : ViewModelBase
     {
+        // property setup
         public ICommand CreateThreadCommand { get; set; }
 
 
@@ -70,14 +71,15 @@ namespace NEA_Main.ViewModels
             CreateThreadCommand = new CreateThreadCommand(this);
         }
 
-        MasterContext context = new MasterContext();
+        MasterContext context = new MasterContext(); // sets up database access
         private ChatThread newThread;
         public void CreateThread()
         {
             newThread = new ChatThread();
+            // input validation
             if (!string.IsNullOrWhiteSpace(InputThreadName) && _parentViewModel.CurrentGroupChat != null)
             {
-                foreach (GroupChat chat in context.GroupChats)
+                foreach (GroupChat chat in context.GroupChats) // gets parent groupchat from database
                 {
                     if (chat.Id == _parentViewModel.CurrentGroupChat.Id)
                     {
@@ -87,7 +89,7 @@ namespace NEA_Main.ViewModels
                     }
                 }
 
-                if (newThread != null)
+                if (newThread != null) // saves changes to the database, sends output to user
                 {
                     context.Add(newThread);
                     context.SaveChanges();

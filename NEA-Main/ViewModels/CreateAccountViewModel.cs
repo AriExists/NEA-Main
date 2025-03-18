@@ -88,7 +88,7 @@ namespace NEA_Main.ViewModels
 
         }
 
-        public int TryCreateAccount()
+        public int TryCreateAccount() // validates inputs. if valid attempts to add to database
         {
             if (!string.IsNullOrEmpty(InputUsername) && !string.IsNullOrEmpty(InputPassword) && !string.IsNullOrEmpty(InputConfirmPassword))
             {
